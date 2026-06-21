@@ -106,6 +106,7 @@
       <span class="k">🍝 comida</span>
       <span class="k">⭐ Michelin</span>
       <span class="k">☕ café/dulce</span>
+      <span class="k">🏨 hotel</span>
     </div>
   </div>
 
@@ -157,7 +158,7 @@
         <p>A 15 min: <a class="map" href="https://www.google.com/maps/search/?api=1&query=Polignano+a+Mare">Polignano a Mare</a>. Baño en <a class="map" href="https://www.google.com/maps/search/?api=1&query=Lama+Monachile+Cala+Porto+Polignano">Lama Monachile / Cala Porto</a> (ir antes de las 10, se llena) y, si reservás, un <b>tour en barco por las grutas</b> para ver la ciudad colgada del acantilado desde el agua.</p>
       </div>
       <div class="block"><span class="tag t-town">🏛️ Tarde-noche · Valle d'Itria</span>
-        <p>Tierra adentro a los pueblos blancos: <a class="map" href="https://www.google.com/maps/search/?api=1&query=Alberobello+Rione+Monti">Alberobello</a> y sus trulli (mejor 17-18 h, cuando bajan los tours), más <a class="map" href="https://www.google.com/maps/search/?api=1&query=Locorotondo">Locorotondo</a> o <a class="map" href="https://www.google.com/maps/search/?api=1&query=Cisternino">Cisternino</a>, pueblos en alto preciosos para cenar.</p>
+        <p>Tierra adentro a los pueblos blancos: <a class="map" href="https://www.google.com/maps/search/?api=1&query=Alberobello+Rione+Monti">Alberobello</a> y sus trulli (mejor 17-18 h, cuando bajan los tours), <a class="map" href="https://www.google.com/maps/search/?api=1&query=Locorotondo">Locorotondo</a> y <a class="map" href="https://www.google.com/maps/search/?api=1&query=Martina+Franca">Martina Franca</a> (la joya barroca del valle, menos invadida que Alberobello). <a class="map" href="https://www.google.com/maps/search/?api=1&query=Cisternino">Cisternino</a> es ideal para cerrar con la cena.</p>
         <p style="font-size:13px;color:var(--muted)"><i>Alternativa si querés cueva:</i> <a class="map" href="https://www.google.com/maps/search/?api=1&query=Grotte+di+Castellana">Grotte di Castellana</a> (visita guiada ~16 €) camino a Alberobello.</p>
       </div>
       <div class="block"><span class="tag t-eat">🍝 Comer</span>
@@ -235,6 +236,9 @@
       </div>
       <div class="block"><span class="tag t-town">🏛️ Tarde-noche</span>
         <p><a class="map" href="https://www.google.com/maps/search/?api=1&query=Gallipoli+centro+storico">Gallipoli</a>: el casco antiguo en una isla unida por un puente, el castillo, las callecitas con bares y el mercado del pescado. Atardecer sobre el Jónico (el sol se mete en el mar).</p>
+      </div>
+      <div class="block"><span class="tag t-town">🏛️ Extras opcionales (cerca, si quieren más)</span>
+        <p><a class="map" href="https://www.google.com/maps/search/?api=1&query=Grottaglie+Quartiere+delle+Ceramiche">Grottaglie</a> — el barrio de la cerámica, lindo para ver alfareros trabajando y comprar piezas. <a class="map" href="https://www.google.com/maps/search/?api=1&query=Taranto+citta+vecchia">Taranto</a> — la "ciudad de los dos mares", con el museo arqueológico <b>MArTA</b> (oro de la Magna Grecia); algo industrial, vale solo si te interesa el museo. Ambas quedan de paso por el lado jónico.</p>
       </div>
       <div class="block"><span class="tag t-eat">🍝 Comer</span>
         <ul>
@@ -384,17 +388,19 @@
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
   var dayColors = {1:'#e63950',2:'#f08a24',3:'#cf9f12',4:'#2fa14b',5:'#0098a6',6:'#3a63d8',7:'#8a3ec4',8:'#9a6324'};
-  var typeIcon = {town:'🏛️', beach:'🏖️', exp:'🥾', eat:'🍝', michelin:'⭐', cafe:'☕'};
+  var typeIcon = {town:'🏛️', beach:'🏖️', exp:'🥾', eat:'🍝', michelin:'⭐', cafe:'☕', hotel:'🏨'};
   // [name, lat, lng, day, type, desc]
   var places = [
     ["Bari (aeropuerto · retiro del auto)",41.1389,16.7606,1,"exp","Llegada 17:10, retiro del auto"],
     ["Monopoli (centro & porto)",40.9512,17.3010,1,"town","Base 1 (4-6 jul): casco antiguo y puerto"],
+    ["🏨 Suite1212 Boutique Hotel (Monopoli)",40.9523,17.3036,1,"hotel","Hotel noches 4-6 jul · centro storico"],
     ["Osteria Perricci (Monopoli)",40.9505,17.3000,1,"eat","Pescado clásico €€"],
     ["Polignano a Mare",40.9960,17.2190,2,"town","Ciudad sobre el acantilado"],
     ["Lama Monachile / Cala Porto",40.9963,17.2178,2,"beach","Cala icónica + tour en barco"],
     ["Pescaria (Polignano)",40.9956,17.2210,2,"eat","Panini de pescado de culto €"],
     ["Alberobello — trulli",40.7831,17.2372,2,"town","Rione Monti, mejor 17-18h"],
     ["Locorotondo",40.7541,17.3263,2,"town","Borgo blanco redondo"],
+    ["Martina Franca",40.7053,17.3380,2,"town","Joya barroca del Valle d'Itria"],
     ["Cisternino (fornello)",40.7392,17.4230,2,"eat","Cena de bombette al momento €"],
     ["Grotte di Castellana",40.8793,17.1530,2,"exp","Cuevas, visita guiada ~16€"],
     ["Orto (campo de Monopoli)",40.9400,17.2800,2,"michelin","Guía Michelin · producto pugliese"],
@@ -406,6 +412,7 @@
     ["Ostuni — Città Bianca",40.7290,17.5770,3,"town","Ciudad blanca (de paso a Lecce)"],
     ["Egnazia (parque arqueológico)",40.8870,17.3940,3,"town","Opcional: ruinas romanas junto al mar"],
     ["Lecce (centro storico)",40.3520,18.1720,3,"town","Base 2 (6-10 jul): barroco leccese"],
+    ["🏨 Palazzo Dei Dondoli (Lecce)",40.3504,18.1672,3,"hotel","Hotel noches 6-10 jul · Via Sozy Carafa 20/A"],
     ["Osteria Piazzetta Cattedrale (Ostuni)",40.7300,17.5760,3,"michelin","Bib Gourmand · almuerzo de paso"],
     ["Cielo – La Sommità (Ostuni)",40.7296,17.5762,3,"michelin","Guía Michelin · terraza ciudad blanca"],
     ["Due Camini (Borgo Egnazia, Savelletri)",40.8872,17.3952,3,"michelin","★ estrella · de camino"],
@@ -426,12 +433,15 @@
     ["Porto Cesareo",40.2600,17.8930,5,"beach","Alternativa de arena blanca"],
     ["Gallipoli (centro storico)",40.0553,17.9760,5,"town","Isla amurallada, atardecer jónico"],
     ["La Puritate (Gallipoli)",40.0560,17.9740,5,"eat","Pescado frente al mar €€"],
+    ["Grottaglie (extra)",40.5360,17.4340,5,"town","Extra opcional: barrio de la cerámica"],
+    ["Taranto (extra)",40.4760,17.2300,5,"town","Extra opcional: dos mares + museo MArTA"],
     ["Pescoluse (Maldive del Salento)",39.8350,18.3000,6,"beach","De tu lista: arena clara, agua poco profunda"],
     ["Santa Maria di Leuca",39.7960,18.3580,6,"beach","De tu lista: la punta del tacón, dos mares"],
     ["Galatina",40.1730,18.1690,6,"town","Frescos Santa Caterina, cuna del pasticciotto"],
     ["Nardò",40.1790,18.0330,6,"town","Plaza barroca preciosa, sin turistas"],
     ["Bros' Trattoria (Scorrano)",40.0930,18.3010,6,"michelin","Bib Gourmand · horno a leña"],
     ["Matera — Sassi",40.6664,16.6110,7,"town","Base 3 (10-11 jul): ciudad de piedra UNESCO"],
+    ["🏨 Conche Luxury Retreat (Matera)",40.6671,16.6098,7,"hotel","Hotel noche 10 jul · Vico delle Conche 12, en los Sassi"],
     ["Belvedere Murgia Timone",40.6720,16.6210,7,"exp","Mejor vista de los Sassi al atardecer"],
     ["La Grotta nei Sassi (Matera)",40.6660,16.6100,7,"eat","Cena en cueva €€"],
     ["Vitantonio Lombardo (Matera)",40.6665,16.6105,7,"michelin","★ estrella · en una cueva"],
