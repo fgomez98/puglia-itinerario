@@ -457,8 +457,8 @@
   ];
 
   var map = L.map('map',{scrollWheelZoom:false}).setView([40.6,17.7],8);
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
-    maxZoom:18, attribution:'© OpenStreetMap'
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png',{
+    subdomains:'abcd', maxZoom:20, attribution:'© OpenStreetMap, © CARTO'
   }).addTo(map);
 
   var markers = [];
