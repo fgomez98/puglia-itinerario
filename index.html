@@ -3,26 +3,26 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Puglia · Ruta + Mapa · 4–11 julio</title>
+<title>París + Fontainebleau · Ruta + Mapa · 27 jun – 4 jul</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 <style>
   :root{
-    --sea:#0e7c86; --sea-dark:#06525a; --sand:#f4ede1; --ink:#1e2b2a; --muted:#677977; --line:#e4ddcf;
-    --beach:#1390a3; --town:#c4622d; --eat:#8a6d1f; --exp:#5e8a3a;
+    --sea:#2c4a7c; --sea-dark:#1d3358; --sand:#f1ece4; --ink:#22262e; --muted:#6a7280; --line:#e2ddd2;
+    --town:#2c4a7c; --eat:#8a6d1f; --exp:#5e8a3a; --shop:#b0398f;
     --d1:#e63950; --d2:#f08a24; --d3:#cf9f12; --d4:#2fa14b; --d5:#0098a6; --d6:#3a63d8; --d7:#8a3ec4; --d8:#9a6324;
-    --shadow:0 8px 26px rgba(6,60,66,.12);
+    --shadow:0 8px 26px rgba(20,40,80,.12);
   }
   *{box-sizing:border-box}
   body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-    background:linear-gradient(180deg,#eaf5f4,#f7f2e9 320px);color:var(--ink);line-height:1.55;-webkit-font-smoothing:antialiased}
+    background:linear-gradient(180deg,#e9eef6,#f6f2ea 320px);color:var(--ink);line-height:1.55;-webkit-font-smoothing:antialiased}
   .wrap{max-width:920px;margin:0 auto;padding:0 16px 70px}
-  .topnav{max-width:920px;margin:0 auto;padding:10px 16px 0;display:flex;gap:8px;justify-content:center}
+  .topnav{max-width:920px;margin:0 auto;padding:10px 16px 0;display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
   .topnav a{text-decoration:none;font-size:13px;font-weight:700;color:var(--sea-dark);background:#fff;border:1px solid var(--line);border-radius:999px;padding:6px 13px}
   .topnav a.cur{background:var(--sea);color:#fff;border-color:var(--sea)}
   header.hero{background:linear-gradient(135deg,var(--sea-dark),var(--sea));color:#fff;
-    border-radius:0 0 26px 26px;padding:34px 22px 28px;box-shadow:var(--shadow);text-align:center;margin-top:10px}
+    border-radius:0 0 26px 26px;padding:30px 22px 26px;box-shadow:var(--shadow);text-align:center;margin-top:10px}
   .hero .kicker{letter-spacing:3px;text-transform:uppercase;font-size:12px;opacity:.85;margin:0}
-  .hero h1{margin:6px 0 4px;font-size:34px;font-weight:800}
+  .hero h1{margin:6px 0 4px;font-size:32px;font-weight:800}
   .hero .sub{opacity:.92;font-size:15px;margin:0}
   .facts{display:flex;flex-wrap:wrap;gap:9px;justify-content:center;margin-top:16px}
   .facts span{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.25);padding:6px 12px;border-radius:999px;font-size:13px}
@@ -50,9 +50,9 @@
   .day{background:#fff;border:1px solid var(--line);border-radius:16px;margin:15px 0;overflow:hidden;box-shadow:var(--shadow)}
   .day>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:14px;padding:15px 17px;outline:none}
   .day>summary::-webkit-details-marker{display:none}
-  .daynum{flex:0 0 auto;width:56px;height:56px;border-radius:13px;color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;font-weight:800;line-height:1.05}
-  .daynum small{font-size:9px;font-weight:700;opacity:.92;letter-spacing:.5px}
-  .daynum b{font-size:19px}
+  .daynum{flex:0 0 auto;width:58px;height:58px;border-radius:13px;color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;font-weight:800;line-height:1.05}
+  .daynum small{font-size:9px;font-weight:700;opacity:.92;letter-spacing:.3px}
+  .daynum b{font-size:18px}
   .dayhead{flex:1;min-width:0}
   .dayhead h2{margin:0;font-size:17px}
   .dayhead .route{margin:3px 0 0;font-size:12.5px;color:var(--muted)}
@@ -62,7 +62,7 @@
   .daybody{padding:0 18px 16px}
   .block{border-top:1px dashed var(--line);padding:12px 0 3px}
   .tag{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;padding:3px 9px;border-radius:999px;color:#fff;margin-bottom:6px}
-  .t-beach{background:var(--beach)}.t-town{background:var(--town)}.t-eat{background:var(--eat)}.t-exp{background:var(--exp)}.t-tip{background:#4a6b6a}
+  .t-town{background:var(--town)}.t-eat{background:var(--eat)}.t-exp{background:var(--exp)}.t-shop{background:var(--shop)}.t-tip{background:#5a6472}
   .block p{margin:6px 0}.block ul{margin:6px 0;padding-left:18px}.block li{margin:5px 0}
   a.map{color:var(--sea-dark);text-decoration:none;border-bottom:1px dotted var(--sea);font-weight:600}
   a.map:hover{color:var(--sea)}
@@ -74,29 +74,29 @@
   .ref .block{border-top:1px dashed var(--line)}
   .pill{display:inline-block;background:var(--sand);border:1px solid var(--line);border-radius:8px;padding:2px 8px;font-size:12px;margin:2px}
   footer{text-align:center;color:var(--muted);font-size:12px;margin-top:30px}
-  @media(max-width:520px){.hero h1{font-size:26px}#map{height:380px}.dayhead h2{font-size:15px}}
+  @media(max-width:520px){.hero h1{font-size:24px}#map{height:380px}.dayhead h2{font-size:15px}}
 </style>
 </head>
 <body>
 <nav class="topnav">
-  <a href="paris.html">🗼 París (27 jun–4 jul)</a>
-  <a href="index.html" class="cur">🇮🇹 Puglia (4–11 jul)</a>
+  <a href="index.html" class="cur">🗼 París (27 jun–4 jul)</a>
+  <a href="puglia.html">🇮🇹 Puglia (4–11 jul)</a>
   <a href="roma.html">🏛️ Roma (11–15 jul)</a>
 </nav>
 <header class="hero">
-  <p class="kicker">Road trip · el tacón de Italia</p>
-  <h1>Puglia — ruta + mapa</h1>
-  <p class="sub">Sáb 4 → Sáb 11 de julio · Monopoli (4-6) → Lecce (6-10) → Matera (10-11)</p>
+  <p class="kicker">El comienzo del viaje</p>
+  <h1>París + Fontainebleau</h1>
+  <p class="sub">Sáb 27 jun (llegás 23:40) → Sáb 4 jul · Montparnasse → Fontainebleau → Le Marais</p>
   <div class="facts">
-    <span>✈️ Bari 17:10 (sáb 4)</span><span>🚗 Auto desde el día 1</span><span>🏖️ Playas del Salento</span>
-    <span>🥾 Excursiones</span><span>🚆 Tren a Roma (sáb 11)</span>
+    <span>✈️ Llegada 23:40 (sáb 27)</span><span>🏛️ Íconos de París</span>
+    <span>💀 Catacumbas · 🌳 Luxemburgo</span><span>🛍️ Tarde de shopping</span><span>🏰 Fontainebleau</span>
   </div>
 </header>
 
 <div class="wrap">
 
   <h3 class="sec" id="mapa">🗺️ Mapa de toda la ruta</h3>
-  <p class="lead">Cada color = un día. Tocá un pin para ver qué es y abrir Google Maps. Filtrá por día, o tocá <b>🍴 Gastro</b> para ver solo Michelin ⭐ y cafés ☕.</p>
+  <p class="lead">Cada color = un día. Tocá un pin para ver qué es y abrir Google Maps. Filtrá por día (el D5 te lleva a Fontainebleau) o tocá <b>🍴 Gastro</b> para ver comidas, Michelin ⭐ y cafés ☕.</p>
   <div class="mapwrap">
     <div class="filters" id="filters">
       <button data-day="all" class="active">Todo</button>
@@ -108,18 +108,18 @@
     <div id="map"></div>
     <div class="legend">
       <span class="k"><b>Tipo:</b></span>
-      <span class="k">🏛️ pueblo / atracción</span>
-      <span class="k">🏖️ playa / cala</span>
-      <span class="k">🥾 excursión</span>
-      <span class="k">🍝 comida</span>
+      <span class="k">🏛️ atracción</span>
+      <span class="k">🌅 mirador / parque</span>
+      <span class="k">🛍️ shopping</span>
+      <span class="k">🍽️ comida</span>
       <span class="k">⭐ Michelin</span>
       <span class="k">☕ café/dulce</span>
-      <span class="k">🏨 hotel</span>
+      <span class="k">🏨 base</span>
     </div>
   </div>
 
   <h3 class="sec" id="ruta">🧭 La ruta, día por día</h3>
-  <p class="lead">2 noches en Monopoli (norte), 4 en Lecce (Salento) y 1 en Matera. Como en Monopoli hay un solo día completo, el domingo combina lo mejor del norte; Ostuni cae de paso el día del traslado a Lecce; y el Salento se reparte en 3 días bien distintos.</p>
+  <p class="lead">Basada en el clásico de 4 días de París, repartida según tus dos bases y ajustada a los cierres. Como no entran a museos, casi todo es ver la ciudad por fuera y caminarla; las Catacumbas (que cierran lunes) y Luxemburgo van el domingo, pegados a tu base.</p>
 
   <div class="toc">
     <a href="#d1">D1</a><a href="#d2">D2</a><a href="#d3">D3</a><a href="#d4">D4</a>
@@ -127,342 +127,312 @@
     <a href="#gastro">🍴 Gastro</a><a href="#tips">💡 Tips</a>
   </div>
 
-  <div class="note"><b>Cómo leer cada día:</b> 🥾 plan / recorrido · 🏖️ mar · 🍝 dónde comer · 💡 tip.
-  Precios por persona orientativos: <span class="price">€ &lt;20</span> <span class="price mid">€€ 20-40</span> <span class="price hi">€€€ 40+</span>. <span class="bib">Bib Gourmand</span> = Michelin buena relación precio-calidad · <span class="star">★</span> = estrella Michelin.</div>
+  <div class="note"><b>Cómo leer cada día:</b> 🥾 plan · 🏛️ qué ver · 🛍️ shopping · 🍽️ dónde comer · 💡 tip.
+  Precios por persona orientativos: <span class="price">€ &lt;20</span> <span class="price mid">€€ 20-40</span> <span class="price hi">€€€ 40+</span>. <span class="bib">Bib Gourmand</span> = Michelin buena relación precio-calidad · <span class="star">★</span> = estrella.</div>
 
   <!-- D1 -->
   <details class="day" id="d1" open>
     <summary>
-      <div class="daynum" style="background:var(--d1)"><small>SÁB 4</small><b>D1</b></div>
-      <div class="dayhead"><h2>Llegada · Bari → Monopoli <span class="badge">Monopoli</span></h2><p class="route">Aterrizaje 17:10 · retiro del auto · noche en Monopoli</p></div>
+      <div class="daynum" style="background:var(--d1)"><small>SÁB 27</small><b>D1</b></div>
+      <div class="dayhead"><h2>Llegada de noche <span class="badge">Montparnasse</span></h2><p class="route">Aterrizás 23:40 · al depto en el 14e · descanso</p></div>
       <div class="chev">▼</div>
     </summary>
     <div class="daybody">
       <div class="block"><span class="tag t-exp">🥾 Llegada</span>
-        <p>Aterrizás en <a class="map" href="https://www.google.com/maps/search/?api=1&query=Aeroporto+di+Bari">Bari</a> a las 17:10, retirás el auto y manejás directo a <a class="map" href="https://www.google.com/maps/search/?api=1&query=Monopoli+centro+storico">Monopoli</a> (~45 min). Check-in en <b>Suites 1212 Boutique Hotel</b>.</p>
+        <p>Aterrizás a las 23:40. Del aeropuerto a tu depto en <a class="map" href="https://www.google.com/maps/search/?api=1&query=39+ter+rue+des+Plantes+75014+Paris">39 ter rue des Plantes (Montparnasse, 14e)</a> en taxi/Uber o RER+metro. A descansar para arrancar con todo mañana.</p>
       </div>
-      <div class="block"><span class="tag t-town">🏛️ Noche</span>
-        <p>Llegás con luz de verano: paseo tranquilo por el casco antiguo, las murallas, la catedral y el <a class="map" href="https://www.google.com/maps/search/?api=1&query=Porto+Antico+Monopoli">porto antico</a> con las barcas de colores. Spritz al atardecer frente al mar y cena sin apuro para arrancar el viaje.</p>
-      </div>
-      <div class="block"><span class="tag t-eat">🍝 Comer</span>
-        <ul>
-          <li><a class="map" href="https://www.google.com/maps/search/?api=1&query=Osteria+Perricci+Monopoli">Osteria Perricci</a> — institución de pescado en Monopoli, clásica y honesta. <span class="price mid">€€</span></li>
-          <li><a class="map" href="https://www.google.com/maps/search/?api=1&query=Madia+Morsi+di+Felicita+Monopoli">Madià – Morsi di Felicità</a> — street food: panzerotti y puccie si querés algo liviano. <span class="price">€</span></li>
-        </ul>
-      </div>
-      <div class="block"><span class="tag t-tip">💡 Tip</span><p>No metas el auto en el centro (ZTL, multan por cámara): estacioná cerca del puerto nuevo o en un parking y caminá. Confirmá con el hotel dónde dejarlo.</p></div>
+      <div class="block"><span class="tag t-tip">💡 Tip</span><p>Comprá la <b>Navigo semanal</b> (transporte ilimitado lun-dom) ni bien puedas. Si te queda energía, la Torre Eiffel <b>centellea 5 min cada hora en punto</b> hasta la 1 am.</p></div>
     </div>
   </details>
 
   <!-- D2 -->
   <details class="day" id="d2">
     <summary>
-      <div class="daynum" style="background:var(--d2)"><small>DOM 5</small><b>D2</b></div>
-      <div class="dayhead"><h2>Gran día norte: Polignano + Valle d'Itria <span class="badge">Monopoli</span></h2><p class="route">Mañana de mar en Polignano · trulli y pueblos blancos a la tarde</p></div>
+      <div class="daynum" style="background:var(--d2)"><small>DOM 28</small><b>D2</b></div>
+      <div class="dayhead"><h2>Catacumbas, Luxemburgo & Île de la Cité <span class="badge">Montparnasse</span></h2><p class="route">Catacumbas · Luxemburgo · Barrio Latino · Notre-Dame · mirador Montparnasse</p></div>
       <div class="chev">▼</div>
     </summary>
     <div class="daybody">
-      <div class="block"><span class="tag t-beach">🏖️ Mañana · Polignano a Mare</span>
-        <p>A 15 min: <a class="map" href="https://www.google.com/maps/search/?api=1&query=Polignano+a+Mare">Polignano a Mare</a>. Baño en <a class="map" href="https://www.google.com/maps/search/?api=1&query=Lama+Monachile+Cala+Porto+Polignano">Lama Monachile / Cala Porto</a> (ir antes de las 10, se llena) y, si reservás, un <b>tour en barco por las grutas</b> para ver la ciudad colgada del acantilado desde el agua.</p>
+      <div class="block"><span class="tag t-town">💀 Mañana · Catacumbas</span>
+        <p>A pasos de tu base: las <a class="map" href="https://www.google.com/maps/search/?api=1&query=Catacombes+de+Paris">Catacumbas de París</a> (osario subterráneo con +6 millones de personas). <b>Reservá entrada con horario</b>, hay colas de +2 h. (No apto si tenés claustrofobia.)</p>
       </div>
-      <div class="block"><span class="tag t-town">🏛️ Tarde-noche · Valle d'Itria</span>
-        <p>Tierra adentro a los pueblos blancos: <a class="map" href="https://www.google.com/maps/search/?api=1&query=Alberobello+Rione+Monti">Alberobello</a> y sus trulli (mejor 17-18 h, cuando bajan los tours), <a class="map" href="https://www.google.com/maps/search/?api=1&query=Locorotondo">Locorotondo</a> y <a class="map" href="https://www.google.com/maps/search/?api=1&query=Martina+Franca">Martina Franca</a> (la joya barroca del valle, menos invadida que Alberobello). <a class="map" href="https://www.google.com/maps/search/?api=1&query=Cisternino">Cisternino</a> es ideal para cerrar con la cena.</p>
-        <p style="font-size:13px;color:var(--muted)"><i>Alternativa si querés cueva:</i> <a class="map" href="https://www.google.com/maps/search/?api=1&query=Grotte+di+Castellana">Grotte di Castellana</a> (visita guiada ~16 €) camino a Alberobello.</p>
+      <div class="block"><span class="tag t-exp">🌳 Mediodía · Luxemburgo & Barrio Latino</span>
+        <p>Subís a los <a class="map" href="https://www.google.com/maps/search/?api=1&query=Jardin+du+Luxembourg">Jardines de Luxemburgo</a> (el estanque, las sillas verdes, la Fuente Medici), el <a class="map" href="https://www.google.com/maps/search/?api=1&query=Pantheon+Paris">Panthéon</a> por fuera y el <a class="map" href="https://www.google.com/maps/search/?api=1&query=Quartier+Latin+Paris">Barrio Latino</a> con la librería <a class="map" href="https://www.google.com/maps/search/?api=1&query=Shakespeare+and+Company+Paris">Shakespeare & Co</a>.</p>
       </div>
-      <div class="block"><span class="tag t-eat">🍝 Comer</span>
+      <div class="block"><span class="tag t-town">🏛️ Tarde · Île de la Cité</span>
+        <p>Cruzás a la <a class="map" href="https://www.google.com/maps/search/?api=1&query=Ile+de+la+Cite+Paris">Île de la Cité</a>: <a class="map" href="https://www.google.com/maps/search/?api=1&query=Notre+Dame+de+Paris">Notre-Dame</a> (reabierta; entrada gratis) y la <a class="map" href="https://www.google.com/maps/search/?api=1&query=Sainte+Chapelle+Paris">Sainte-Chapelle</a> (si querés entrar a ver los vitrales). Atardecer en la <a class="map" href="https://www.google.com/maps/search/?api=1&query=Tour+Montparnasse">Torre Montparnasse</a> (vista 360° con la Eiffel de frente), al lado de tu depto.</p>
+      </div>
+      <div class="block"><span class="tag t-eat">🍽️ Comer</span>
         <ul>
-          <li><a class="map" href="https://www.google.com/maps/search/?api=1&query=Pescaria+Polignano+a+Mare">Pescaria</a> (Polignano) — panini de pescado de culto, fresquísimos y baratos. <span class="price">€</span></li>
-          <li><b>Cena ritual en Cisternino:</b> elegís la carne en una <i>macelleria-fornello</i> (bombette, salsiccia) y te la asan al momento. <span class="price">€</span></li>
+          <li><a class="map" href="https://www.google.com/maps/search/?api=1&query=La+Jacobine+Paris">La Jacobine</a> (Barrio Latino) — clásico acogedor. <span class="price mid">€€</span></li>
+          <li>Crêpe/galette en una crêperie bretona de la <a class="map" href="https://www.google.com/maps/search/?api=1&query=Creperie+Josselin+Paris">Rue du Montparnasse</a>, cerca de tu base. <span class="price">€</span></li>
         </ul>
       </div>
-      <div class="block"><span class="tag t-tip">💡 Tip</span><p>Es el único día completo en el norte, así que conviene salir tempranito a Polignano. Las <i>bombette</i> son LA especialidad del Valle d'Itria.</p></div>
+      <div class="block"><span class="tag t-tip">💡 Tip</span><p>Las Catacumbas <b>cierran los lunes</b>, por eso van hoy domingo (y te quedan a la vuelta de casa). Reservá la entrada online con anticipación.</p></div>
     </div>
   </details>
 
   <!-- D3 -->
   <details class="day" id="d3">
     <summary>
-      <div class="daynum" style="background:var(--d3)"><small>LUN 6</small><b>D3</b></div>
-      <div class="dayhead"><h2>Monopoli → Lecce, con Ostuni de paso <span class="badge">Lecce</span></h2><p class="route">Salir temprano · la Città Bianca en el camino · Lecce barroca al atardecer</p></div>
+      <div class="daynum" style="background:var(--d3)"><small>LUN 29</small><b>D3</b></div>
+      <div class="dayhead"><h2>París icónico · Eiffel & los Campos <span class="badge">Montparnasse</span></h2><p class="route">Trocadéro · Torre Eiffel · Inválidos · Arco del Triunfo · Louvre por fuera</p></div>
       <div class="chev">▼</div>
     </summary>
     <div class="daybody">
-      <div class="block"><span class="tag t-town">🏛️ Parada en el camino</span>
-        <p>Salís temprano de Monopoli y, como queda justo de camino, parás en <a class="map" href="https://www.google.com/maps/search/?api=1&query=Ostuni+centro+storico">Ostuni</a>, "la Città Bianca": el laberinto de casas encaladas, la subida a la Catedral y el mirador sobre el valle de olivos. <i>Opcional:</i> las ruinas de <a class="map" href="https://www.google.com/maps/search/?api=1&query=Parco+Archeologico+di+Egnazia+Savelletri">Egnazia</a> (Savelletri), romanas y junto al mar.</p>
+      <div class="block"><span class="tag t-town">🏛️ Mañana</span>
+        <p><a class="map" href="https://www.google.com/maps/search/?api=1&query=Place+du+Trocadero+Paris">Plaza de Trocadéro</a> (la mejor postal de la <a class="map" href="https://www.google.com/maps/search/?api=1&query=Tour+Eiffel">Torre Eiffel</a>), el <a class="map" href="https://www.google.com/maps/search/?api=1&query=Champ+de+Mars+Paris">Campo de Marte</a>, el <a class="map" href="https://www.google.com/maps/search/?api=1&query=Pont+Alexandre+III">Pont Alexandre III</a> (el puente más lindo) y <a class="map" href="https://www.google.com/maps/search/?api=1&query=Les+Invalides">Los Inválidos</a>.</p>
       </div>
-      <div class="block"><span class="tag t-town">🏛️ Tarde-noche · Lecce</span>
-        <p>Seguís a <a class="map" href="https://www.google.com/maps/search/?api=1&query=Lecce+centro+storico">Lecce</a> (~1h desde Ostuni), check-in en <b>Palazzo Dei Dondoli</b>. Tarde de barroco leccese: la <a class="map" href="https://www.google.com/maps/search/?api=1&query=Basilica+di+Santa+Croce+Lecce">Basilica di Santa Croce</a>, la <a class="map" href="https://www.google.com/maps/search/?api=1&query=Piazza+del+Duomo+Lecce">Piazza del Duomo</a>, el <a class="map" href="https://www.google.com/maps/search/?api=1&query=Anfiteatro+Romano+Lecce">Anfiteatro Romano</a> y los talleres de <i>cartapesta</i>.</p>
+      <div class="block"><span class="tag t-town">🏛️ Tarde · íconos</span>
+        <p><a class="map" href="https://www.google.com/maps/search/?api=1&query=Arc+de+Triomphe">Arco del Triunfo</a> → bajás por los <a class="map" href="https://www.google.com/maps/search/?api=1&query=Champs+Elysees">Campos Elíseos</a> → <a class="map" href="https://www.google.com/maps/search/?api=1&query=Place+de+la+Concorde">Plaza de la Concordia</a> → <a class="map" href="https://www.google.com/maps/search/?api=1&query=Jardin+des+Tuileries">Jardín de las Tullerías</a> → <b>pasás por el <a class="map" href="https://www.google.com/maps/search/?api=1&query=Pyramide+du+Louvre">Louvre</a></b> para ver la pirámide y el Cour Napoléon por fuera, el <a class="map" href="https://www.google.com/maps/search/?api=1&query=Palais+Royal+Colonnes+de+Buren">Palais Royal</a> (Colonnes de Buren) y la <a class="map" href="https://www.google.com/maps/search/?api=1&query=Place+Vendome+Paris">Place Vendôme</a>.</p>
       </div>
-      <div class="block"><span class="tag t-eat">🍝 Comer</span>
+      <div class="block"><span class="tag t-exp">🌅 Atardecer</span>
+        <p>Volvé al Trocadéro al anochecer para ver la Torre encenderse y centellear. Mágico.</p>
+      </div>
+      <div class="block"><span class="tag t-eat">🍽️ Comer</span>
         <ul>
-          <li><a class="map" href="https://www.google.com/maps/search/?api=1&query=Osteria+Piazzetta+Cattedrale+Ostuni">Osteria Piazzetta Cattedrale</a> (Ostuni, almuerzo) — producto pugliese de primera. <span class="bib">Bib Gourmand</span> <span class="price mid">€€</span></li>
-          <li><a class="map" href="https://www.google.com/maps/search/?api=1&query=Trattoria+Le+Zie+Cucina+Casareccia+Lecce">Le Zie – Cucina Casareccia</a> (Lecce) — la trattoria leccese; pedí <i>ciceri e tria</i>. <span class="price mid">€€</span></li>
-          <li><a class="map" href="https://www.google.com/maps/search/?api=1&query=Caffe+Alvino+Lecce">Caffè Alvino</a> — el <i>pasticciotto</i> tibio y el <i>caffè leccese</i> (café frío con leche de almendra). <span class="price">€</span></li>
+          <li>Macarons en <a class="map" href="https://www.google.com/maps/search/?api=1&query=Laduree+Champs+Elysees">Ladurée</a> (Campos Elíseos). <span class="price">€</span></li>
+          <li>Sopa de cebolla y clásicos en un bistró de la zona. <span class="price mid">€€</span></li>
         </ul>
       </div>
-      <div class="block"><span class="tag t-tip">💡 Tip</span><p>Saliendo temprano te alcanza para Ostuni con calma y llegar a Lecce a media tarde. Lecce de noche tiene muchísima vida: ideal para cenar afuera y caminar.</p></div>
+      <div class="block"><span class="tag t-tip">💡 Tip</span><p>Como no entran al Louvre, lo ven por fuera (la pirámide de Pei) sin colas ni tickets. Día casi todo al aire libre, perfecto para un lunes. Reservá la Torre Eiffel si quieren subir.</p></div>
     </div>
   </details>
 
   <!-- D4 -->
   <details class="day" id="d4">
     <summary>
-      <div class="daynum" style="background:var(--d4)"><small>MAR 7</small><b>D4</b></div>
-      <div class="dayhead"><h2>Salento adriático <span class="badge">Lecce</span></h2><p class="route">Calas rocosas de Melendugno · Otranto · Cava di Bauxite</p></div>
+      <div class="daynum" style="background:var(--d4)"><small>MAR 30</small><b>D4</b></div>
+      <div class="dayhead"><h2>Montmartre & Grandes Bulevares → Fontainebleau <span class="badge">traslado</span></h2><p class="route">Sacré-Cœur · Moulin Rouge · Ópera · Lafayette · tren de la tarde</p></div>
       <div class="chev">▼</div>
     </summary>
     <div class="daybody">
-      <div class="block"><span class="tag t-beach">🏖️ Mañana (de tu lista, y pegadas entre sí)</span>
-        <p>Costa de Melendugno, todo a 6 km: <a class="map" href="https://www.google.com/maps/search/?api=1&query=Grotta+della+Poesia+Roca+Vecchia">Grotta della Poesía</a> (piscina natural en la roca, para tirarse al agua), <a class="map" href="https://www.google.com/maps/search/?api=1&query=Torre+dell+Orso">Torre dell'Orso</a> (arena y pinares con sombra) y los faraglioni de <a class="map" href="https://www.google.com/maps/search/?api=1&query=Torre+Sant+Andrea">Torre Sant'Andrea</a>. Ir temprano.</p>
+      <div class="block"><span class="tag t-town">🏛️ Mañana · Montmartre</span>
+        <p><a class="map" href="https://www.google.com/maps/search/?api=1&query=Sacre+Coeur">Sacré-Cœur</a> y su mirador, la <a class="map" href="https://www.google.com/maps/search/?api=1&query=Place+du+Tertre">Place du Tertre</a> (pintores), el <a class="map" href="https://www.google.com/maps/search/?api=1&query=Mur+des+Je+t+aime">Muro de los "Te quiero"</a> y, bajando, el <a class="map" href="https://www.google.com/maps/search/?api=1&query=Moulin+Rouge">Moulin Rouge</a> en Pigalle.</p>
       </div>
-      <div class="block"><span class="tag t-town">🏛️ Tarde</span>
-        <p><a class="map" href="https://www.google.com/maps/search/?api=1&query=Otranto+centro+storico">Otranto</a>: castillo aragonés, la catedral con el mosaico del Árbol de la Vida y el casco amurallado. Punto más oriental de Italia. Bañito extra en <a class="map" href="https://www.google.com/maps/search/?api=1&query=Baia+dei+Turchi+Otranto">Baia dei Turchi</a> (pinares y agua transparente, de las mejores).</p>
+      <div class="block"><span class="tag t-town">🏛️ Mediodía · Grandes Bulevares</span>
+        <p>La <a class="map" href="https://www.google.com/maps/search/?api=1&query=Opera+Garnier">Ópera Garnier</a> (por fuera, o el hall) y la terraza gratis de las <a class="map" href="https://www.google.com/maps/search/?api=1&query=Galeries+Lafayette+Haussmann">Galerías Lafayette</a> (cúpula Art Nouveau + vista 360°). Si querés más compras, también <a class="map" href="https://www.google.com/maps/search/?api=1&query=Printemps+Haussmann">Printemps</a>.</p>
       </div>
-      <div class="block"><span class="tag t-town">🏛️ Joya escondida</span>
-        <p><a class="map" href="https://www.google.com/maps/search/?api=1&query=Cava+di+Bauxite+Otranto">Cava di Bauxite</a> (cantera con tierra roja y laguna esmeralda, surreal para fotos) y, si querés, el <a class="map" href="https://www.google.com/maps/search/?api=1&query=Faro+di+Punta+Palascia+Otranto">Faro di Punta Palascìa</a> para el atardecer.</p>
+      <div class="block"><span class="tag t-exp">🥾 Tarde-noche · a Fontainebleau</span>
+        <p>Volvés al depto por las valijas y tomás el tren desde <a class="map" href="https://www.google.com/maps/search/?api=1&query=Gare+de+Lyon+Paris">Gare de Lyon</a> a Fontainebleau (~40 min). Check-in en el hotel.</p>
       </div>
-      <div class="block"><span class="tag t-eat">🍝 Comer</span>
+      <div class="block"><span class="tag t-eat">🍽️ Comer</span>
         <ul>
-          <li><a class="map" href="https://www.google.com/maps/search/?api=1&query=Masseria+Montelauro+Otranto">Masseria Montelauro</a> (afueras de Otranto) — cena entre olivos, cocina salentina. <span class="price mid">€€</span></li>
-          <li><a class="map" href="https://www.google.com/maps/search/?api=1&query=L+Ortale+Otranto">L'Ortale</a> (Otranto) — enoteca con terraza de buganvillas; <i>pitta di patate</i>. <span class="price mid">€€</span></li>
+          <li><a class="map" href="https://www.google.com/maps/search/?api=1&query=Bouillon+Pigalle">Bouillon Pigalle</a> — cocina francesa tradicional, riquísima y baratísima. <span class="price">€</span></li>
+          <li><a class="map" href="https://www.google.com/maps/search/?api=1&query=Le+Relais+Gascon+Montmartre">Le Relais Gascon</a> (Montmartre) — ensaladas gigantes con papas al ajo. <span class="price">€</span></li>
         </ul>
       </div>
-      <div class="block"><span class="tag t-tip">💡 Tip</span><p>Llevá calzado de agua para las rocas de la Grotta della Poesía. En Otranto dejá el auto en los parkings de la entrada y entrá caminando.</p></div>
+      <div class="block"><span class="tag t-tip">💡 Tip</span><p>Hoy es martes: Montmartre es al aire libre, ideal. Salí con tiempo a Gare de Lyon con las valijas para el tren de la tarde.</p></div>
     </div>
   </details>
 
   <!-- D5 -->
   <details class="day" id="d5">
     <summary>
-      <div class="daynum" style="background:var(--d5)"><small>MIÉ 8</small><b>D5</b></div>
-      <div class="dayhead"><h2>Salento jónico <span class="badge">Lecce</span></h2><p class="route">Arena blanca en Punta Prosciutto · Gallipoli al atardecer</p></div>
+      <div class="daynum" style="background:var(--d5)"><small>MIÉ 1</small><b>D5</b></div>
+      <div class="dayhead"><h2>Fontainebleau <span class="badge">château & bosque</span></h2><p class="route">Palacio UNESCO · jardines · bosque o pueblo</p></div>
       <div class="chev">▼</div>
     </summary>
     <div class="daybody">
-      <div class="block"><span class="tag t-beach">🏖️ Mañana (de tu lista)</span>
-        <p><a class="map" href="https://www.google.com/maps/search/?api=1&query=Punta+Prosciutto">Punta Prosciutto</a> (o <a class="map" href="https://www.google.com/maps/search/?api=1&query=Porto+Cesareo">Porto Cesareo</a>): arena blanca y agua turquesa caribeña, el contraste perfecto con las calas rocosas de ayer. Compite por "playa más linda de Italia".</p>
+      <div class="block"><span class="tag t-town">🏛️ Mañana</span>
+        <p>El <a class="map" href="https://www.google.com/maps/search/?api=1&query=Chateau+de+Fontainebleau">Château de Fontainebleau</a> (Patrimonio UNESCO): 1.500 habitaciones con mobiliario casi intacto, hogar de reyes de Francia y de Napoleón. Dedicale medio día, sumando los <a class="map" href="https://www.google.com/maps/search/?api=1&query=Jardins+du+Chateau+de+Fontainebleau">jardines y el estanque</a>.</p>
       </div>
-      <div class="block"><span class="tag t-town">🏛️ Tarde-noche</span>
-        <p><a class="map" href="https://www.google.com/maps/search/?api=1&query=Gallipoli+centro+storico">Gallipoli</a>: el casco antiguo en una isla unida por un puente, el castillo, las callecitas con bares y el mercado del pescado. Atardecer sobre el Jónico (el sol se mete en el mar).</p>
+      <div class="block"><span class="tag t-exp">🌅 Tarde</span>
+        <p>El <a class="map" href="https://www.google.com/maps/search/?api=1&query=Foret+de+Fontainebleau+Gorges+d+Apremont">bosque de Fontainebleau</a> (senderos, las Gorges d'Apremont, escalada de boulder) o el pueblo, con calles adoquinadas y cafés. <i>Opcional:</i> el pueblo de pintores <a class="map" href="https://www.google.com/maps/search/?api=1&query=Barbizon">Barbizon</a> o el precioso <a class="map" href="https://www.google.com/maps/search/?api=1&query=Moret-sur-Loing">Moret-sur-Loing</a>.</p>
       </div>
-      <div class="block"><span class="tag t-town">🏛️ Extras opcionales (cerca, si quieren más)</span>
-        <p><a class="map" href="https://www.google.com/maps/search/?api=1&query=Grottaglie+Quartiere+delle+Ceramiche">Grottaglie</a> — el barrio de la cerámica, lindo para ver alfareros trabajando y comprar piezas. <a class="map" href="https://www.google.com/maps/search/?api=1&query=Taranto+citta+vecchia">Taranto</a> — la "ciudad de los dos mares", con el museo arqueológico <b>MArTA</b> (oro de la Magna Grecia); algo industrial, vale solo si te interesa el museo. Ambas quedan de paso por el lado jónico.</p>
-      </div>
-      <div class="block"><span class="tag t-eat">🍝 Comer</span>
+      <div class="block"><span class="tag t-eat">🍽️ Comer</span>
         <ul>
-          <li><a class="map" href="https://www.google.com/maps/search/?api=1&query=La+Puritate+Gallipoli">La Puritate</a> (Gallipoli) — pescado y crudo de mar frente al agua. <span class="price mid">€€</span></li>
-          <li>En la playa: chiringuito de Punta Prosciutto, ensalada de pasta y <i>frisa</i> con los pies en la arena. <span class="price">€</span></li>
+          <li>Probá lo local: el queso <i>Brie de Meaux</i> y el postre de crema <i>"Fontainebleau"</i>. Restos y cafés en el centro del pueblo. <span class="price mid">€€</span></li>
         </ul>
       </div>
-      <div class="block"><span class="tag t-tip">💡 Tip</span><p>Llegá temprano a Punta Prosciutto para estacionar. El <i>gambero rosso di Gallipoli</i> crudo es dulcísimo, no te lo pierdas.</p></div>
+      <div class="block"><span class="tag t-tip">💡 Tip</span><p>El château abre ~9:30; andá temprano para evitar grupos. Cierra los martes (vas miércoles, todo bien). Ideal alquilar bici para combinar palacio + bosque.</p></div>
     </div>
   </details>
 
   <!-- D6 -->
   <details class="day" id="d6">
     <summary>
-      <div class="daynum" style="background:var(--d6)"><small>JUE 9</small><b>D6</b></div>
-      <div class="dayhead"><h2>La punta del tacón <span class="badge">Lecce</span></h2><p class="route">Pescoluse & Santa Maria di Leuca · pueblo escondido del Salento</p></div>
+      <div class="daynum" style="background:var(--d6)"><small>JUE 2</small><b>D6</b></div>
+      <div class="dayhead"><h2>Vuelta a París · Le Marais & shopping <span class="badge">🛍️ tarde</span></h2><p class="route">Regreso a la mañana · check-in Place des Vosges · boutiques del Marais</p></div>
       <div class="chev">▼</div>
     </summary>
     <div class="daybody">
-      <div class="block"><span class="tag t-beach">🏖️ Mañana (de tu lista)</span>
-        <p>Bajás hasta el extremo del tacón: <a class="map" href="https://www.google.com/maps/search/?api=1&query=Pescoluse+Maldive+del+Salento">Pescoluse</a>, "las Maldivas del Salento", arena clarísima y agua poco profunda. A un paso, <a class="map" href="https://www.google.com/maps/search/?api=1&query=Santa+Maria+di+Leuca">Santa Maria di Leuca</a>, donde se "tocan" el Adriático y el Jónico: el faro, la basílica y el paseo marítimo.</p>
+      <div class="block"><span class="tag t-exp">🥾 Mañana</span>
+        <p>Tren de vuelta a París y check-in en tu depto de la <a class="map" href="https://www.google.com/maps/search/?api=1&query=Place+des+Vosges+Paris">Place des Vosges</a> (Le Marais, 3e) — la plaza más antigua y elegante de París, con la <a class="map" href="https://www.google.com/maps/search/?api=1&query=Maison+de+Victor+Hugo+Paris">casa de Victor Hugo</a>.</p>
       </div>
-      <div class="block"><span class="tag t-town">🏛️ Tarde · joya escondida</span>
-        <p>De vuelta hacia Lecce, parada cultural en <a class="map" href="https://www.google.com/maps/search/?api=1&query=Galatina+Basilica+Santa+Caterina">Galatina</a> (los frescos increíbles de la Basílica de Santa Caterina, casi sin turistas, y cuna del <i>pasticciotto</i>) o en <a class="map" href="https://www.google.com/maps/search/?api=1&query=Nardo+centro+storico">Nardò</a>, con su plaza barroca preciosa.</p>
+      <div class="block"><span class="tag t-shop">🛍️ Tarde de shopping</span>
+        <p>El Marais es <b>el</b> barrio de compras: boutiques de diseño y vintage en la <a class="map" href="https://www.google.com/maps/search/?api=1&query=Rue+des+Francs-Bourgeois+Paris">Rue des Francs-Bourgeois</a> y alrededores, la tienda <a class="map" href="https://www.google.com/maps/search/?api=1&query=BHV+Marais">BHV Marais</a> y la <a class="map" href="https://www.google.com/maps/search/?api=1&query=Rue+de+Rivoli+Paris">Rue de Rivoli</a>. Mezclalo con las callecitas y la <a class="map" href="https://www.google.com/maps/search/?api=1&query=Rue+des+Rosiers+Paris">Rue des Rosiers</a> (corazón judío del barrio).</p>
       </div>
-      <div class="block"><span class="tag t-eat">🍝 Comer</span>
+      <div class="block"><span class="tag t-eat">🍽️ Comer</span>
         <ul>
-          <li><a class="map" href="https://www.google.com/maps/search/?api=1&query=Bros+Trattoria+Scorrano">Bros' Trattoria</a> (Scorrano, de camino) — horno a leña, recetas tradicionales. <span class="bib">Bib Gourmand</span> <span class="price mid">€€</span></li>
-          <li>Almuerzo de playa en Pescoluse o pescado fresco en Leuca. <span class="price mid">€€</span></li>
+          <li><a class="map" href="https://www.google.com/maps/search/?api=1&query=L+As+du+Fallafel+Paris">L'As du Fallafel</a> (Rue des Rosiers) — el mejor falafel de París, barato y de culto. <span class="price">€</span></li>
+          <li><a class="map" href="https://www.google.com/maps/search/?api=1&query=Cafe+des+Musees+Paris">Café des Musées</a> — bistró de 1924; su <i>beef bourguignon</i> fue elegido el mejor de París. <span class="bib">Bib Gourmand</span> <span class="price mid">€€</span></li>
         </ul>
       </div>
-      <div class="block"><span class="tag t-tip">💡 Tip</span><p>Leuca está a ~1h30 de Lecce: es plan de día completo, salí con tiempo. Última noche en Lecce: aprovechá para cenar bien en el centro.</p></div>
+      <div class="block"><span class="tag t-tip">💡 Tip</span><p>Muchas tiendas del Marais abren los domingos (raro en París) y cierran ~19:30 el resto. El barrio se camina entero y es ideal de noche.</p></div>
     </div>
   </details>
 
   <!-- D7 -->
   <details class="day" id="d7">
     <summary>
-      <div class="daynum" style="background:var(--d7)"><small>VIE 10</small><b>D7</b></div>
-      <div class="dayhead"><h2>Lecce → Matera <span class="badge">Matera</span></h2><p class="route">Traslado · los Sassi · atardecer en el Belvedere</p></div>
+      <div class="daynum" style="background:var(--d7)"><small>VIE 3</small><b>D7</b></div>
+      <div class="dayhead"><h2>Rive Gauche, puentes & Sena <span class="badge">Marais</span></h2><p class="route">Saint-Germain · Pont des Arts · Pont Neuf · Île Saint-Louis · crucero</p></div>
       <div class="chev">▼</div>
     </summary>
     <div class="daybody">
-      <div class="block"><span class="tag t-exp">🥾 Traslado</span>
-        <p>Salís de Lecce hacia <a class="map" href="https://www.google.com/maps/search/?api=1&query=Matera+Sassi">Matera</a> (~2h15). Check-in en <b>Conche Luxury Retreat</b>. El resto del día para perderte por los <a class="map" href="https://www.google.com/maps/search/?api=1&query=Sassi+di+Matera">Sassi</a> (Patrimonio UNESCO): la Cattedrale, la Chiesa di Santa Maria de Idris y una <a class="map" href="https://www.google.com/maps/search/?api=1&query=Casa+Grotta+di+Vico+Solitario+Matera">Casa Grotta</a> para ver cómo se vivía en las cuevas.</p>
+      <div class="block"><span class="tag t-town">🏛️ Mañana</span>
+        <p><a class="map" href="https://www.google.com/maps/search/?api=1&query=Saint-Germain-des-Pres">Saint-Germain-des-Prés</a> y sus cafés míticos, el <a class="map" href="https://www.google.com/maps/search/?api=1&query=Musee+d+Orsay">Musée d'Orsay</a> por fuera (la antigua estación con el reloj gigante) y los puentes: el <a class="map" href="https://www.google.com/maps/search/?api=1&query=Pont+des+Arts+Paris">Pont des Arts</a> y el <a class="map" href="https://www.google.com/maps/search/?api=1&query=Pont+Neuf+Paris">Pont Neuf</a> (el más antiguo).</p>
       </div>
-      <div class="block"><span class="tag t-exp">🥾 Atardecer</span>
-        <p>Cruzá al <a class="map" href="https://www.google.com/maps/search/?api=1&query=Belvedere+Murgia+Timone+Matera">Belvedere Murgia Timone</a> (al otro lado del barranco): la mejor vista de los Sassi iluminándose al caer la noche. Imperdible.</p>
+      <div class="block"><span class="tag t-town">🏛️ Tarde</span>
+        <p>La <a class="map" href="https://www.google.com/maps/search/?api=1&query=Ile+Saint-Louis+Paris">Île Saint-Louis</a> con su helado <a class="map" href="https://www.google.com/maps/search/?api=1&query=Berthillon+Paris">Berthillon</a>, y un <a class="map" href="https://www.google.com/maps/search/?api=1&query=Bateaux+Mouches+Paris">crucero por el Sena</a> al atardecer (pasás por delante de todos los íconos desde el agua).</p>
       </div>
-      <div class="block"><span class="tag t-eat">🍝 Comer</span>
+      <div class="block"><span class="tag t-exp">🥾 Alternativa de día completo</span>
+        <p>Si quieren un palacio más: <a class="map" href="https://www.google.com/maps/search/?api=1&query=Chateau+de+Versailles">Versalles</a> (RER C, ~40 min; reservar y salir temprano). Como ya hacen Fontainebleau, es totalmente opcional.</p>
+      </div>
+      <div class="block"><span class="tag t-eat">🍽️ Comer</span>
         <ul>
-          <li><a class="map" href="https://www.google.com/maps/search/?api=1&query=La+Grotta+nei+Sassi+Matera">La Grotta nei Sassi</a> — cena en una cueva con vista; pedí <i>orecchiette alle cime di rapa</i>. <span class="price mid">€€</span></li>
-          <li><a class="map" href="https://www.google.com/maps/search/?api=1&query=Osteria+La+Pignata+Matera">Osteria La Pignata</a> — casera, buena fama, precios amables. <span class="price">€</span></li>
+          <li>Café histórico en Saint-Germain: <a class="map" href="https://www.google.com/maps/search/?api=1&query=Les+Deux+Magots+Paris">Les Deux Magots</a> o <a class="map" href="https://www.google.com/maps/search/?api=1&query=Cafe+de+Flore+Paris">Café de Flore</a>. <span class="price mid">€€</span></li>
+          <li>Helado <a class="map" href="https://www.google.com/maps/search/?api=1&query=Berthillon+Paris">Berthillon</a> en la Île Saint-Louis. <span class="price">€</span></li>
         </ul>
       </div>
-      <div class="block"><span class="tag t-tip">💡 Tip</span><p>Matera es Basilicata, no Puglia, pero está pegada y vale muchísimo. Todo es subida y bajada de piedra: calzado cómodo sí o sí.</p></div>
+      <div class="block"><span class="tag t-tip">💡 Tip</span><p>El crucero por el Sena al atardecer es de lo más lindo y barato para "ver todo" sin caminar. Reservalo o tomalo en el embarcadero del Pont Neuf o la Torre Eiffel.</p></div>
     </div>
   </details>
 
   <!-- D8 -->
   <details class="day" id="d8">
     <summary>
-      <div class="daynum" style="background:var(--d8)"><small>SÁB 11</small><b>D8</b></div>
-      <div class="dayhead"><h2>Matera → Bari · tren a Roma</h2><p class="route">Mañana en los Sassi · dejar el auto 17:00 · tren a Roma</p></div>
+      <div class="daynum" style="background:var(--d8)"><small>SÁB 4</small><b>D8</b></div>
+      <div class="dayhead"><h2>Última mañana → vuelo a Bari</h2><p class="route">Marais & mercado · al aeropuerto · vuelo 14:55</p></div>
       <div class="chev">▼</div>
     </summary>
     <div class="daybody">
       <div class="block"><span class="tag t-town">🏛️ Mañana</span>
-        <p>Última mañana en <a class="map" href="https://www.google.com/maps/search/?api=1&query=Sassi+di+Matera">Matera</a> con calma: los Sassi de día, un café con vista y comprar <i>pane di Matera</i> para el camino. Almuerzo temprano.</p>
+        <p>Croissant de despedida en una <i>boulangerie</i> y una vuelta por el <a class="map" href="https://www.google.com/maps/search/?api=1&query=Marche+des+Enfants+Rouges">Marché des Enfants Rouges</a> (el mercado cubierto más antiguo de París) o las callecitas del Marais.</p>
       </div>
-      <div class="block"><span class="tag t-exp">🥾 Cierre logístico</span>
-        <p>Manejás <a class="map" href="https://www.google.com/maps/search/?api=1&query=Bari">Matera → Bari</a> (~1h). <b>Dejás el auto antes de las 17:00.</b> Si te queda un rato, una vuelta por <a class="map" href="https://www.google.com/maps/search/?api=1&query=Bari+Vecchia">Bari Vecchia</a> (la Strada delle Orecchiette, San Nicola) antes de tomar el <a class="map" href="https://www.google.com/maps/search/?api=1&query=Bari+Centrale+stazione">tren a Roma</a>.</p>
+      <div class="block"><span class="tag t-exp">🥾 Cierre · al aeropuerto</span>
+        <p>Al mediodía salís al aeropuerto para el vuelo de las <b>14:55 a Bari</b> (llega 17:10, donde empieza la parte de Puglia 🇮🇹).</p>
       </div>
-      <div class="block"><span class="tag t-tip">💡 Tip</span><p>Salí de Matera con margen (a media mañana/mediodía) para no apurarte con la devolución del auto y el tren. Dejá nafta cargada: muchas rentadoras la piden con tanque lleno.</p></div>
+      <div class="block"><span class="tag t-tip">💡 Tip</span><p><b>Confirmá tu aeropuerto</b> en el pasaje (los vuelos a Bari salen de CDG, Orly o Beauvais). Para un vuelo europeo, estar ~2 h antes; sumale el traslado desde el Marais (40-60 min).</p></div>
     </div>
   </details>
 
   <!-- GASTRO -->
-  <h3 class="sec" id="gastro">🍴 Gastronomía por zona — Michelin, cafés y lo típico</h3>
-  <p class="lead">Qué comer en cada parada: lo típico de cada región, los cafés/dulces que hay que probar, y mesas de la guía Michelin. <span class="bib">Bib Gourmand</span> = rico y accesible · <span class="star">★</span> = cena de ocasión (reservar, presupuesto alto).</p>
+  <h3 class="sec" id="gastro">🍴 Gastronomía — Michelin, bistrós y lo típico</h3>
+  <p class="lead">Qué comer y dónde, por barrio. <span class="bib">Bib Gourmand</span> = rico y accesible (3 platos &lt; €40) · <span class="star">★</span> = ocasión especial.</p>
   <div class="ref">
 
-    <div class="block" style="border-top:none"><span class="tag t-eat">🗺️ Monopoli & costa norte · D1–D2</span>
-      <p><b>Típico:</b> mar crudo (<i>crudo di mare</i>, ostras, ricci/erizos), pulpo, <i>spaghetti ai ricci</i>, focaccia barese y <i>sgagliozze</i> (polenta frita callejera).</p>
-      <p><b>⭐ Michelin:</b> <a class="map" href="https://www.google.com/maps/search/?api=1&query=Orto+ristorante+Monopoli">Orto</a> (campo de Monopoli, en la guía) · cerca: <a class="map" href="https://www.google.com/maps/search/?api=1&query=Pasha+Conversano">Pashà</a> (Conversano) <span class="star">★</span>.</p>
-      <p><b>☕ Café & dulce:</b> el <i>sporcamuss</i> (hojaldre con crema, barese) y un buen gelato en el casco de Monopoli.</p>
+    <div class="block" style="border-top:none"><span class="tag t-eat">🍽️ Imprescindibles franceses</span>
+      <p><span class="pill">Croissant / pain au chocolat</span><span class="pill">Baguette</span><span class="pill">Steak frites</span><span class="pill">Confit de canard</span><span class="pill">Escargots</span><span class="pill">Soupe à l'oignon</span><span class="pill">Croque-monsieur</span><span class="pill">Crêpe & galette</span><span class="pill">Quiche lorraine</span><span class="pill">Macaron</span><span class="pill">Éclair</span><span class="pill">Fromages</span></p>
     </div>
 
-    <div class="block"><span class="tag t-eat">🗺️ Valle d'Itria · D2</span>
-      <p><b>Típico:</b> la tierra de la carne — <i>bombette</i>, <i>capocollo di Martina Franca</i> DOP, <i>gnummareddi</i> y el ritual del <i>fornello pronto</i>. Quesos: <i>caciocavallo</i>, burrata.</p>
-      <p><b>⭐ Michelin:</b> <a class="map" href="https://www.google.com/maps/search/?api=1&query=Angelo+Sabatelli+Putignano">Angelo Sabatelli</a> (Putignano) <span class="star">★</span> · <a class="map" href="https://www.google.com/maps/search/?api=1&query=Cibus+Ceglie+Messapica">Cibus</a> (Ceglie Messapica) <span class="bib">Bib Gourmand</span>.</p>
-      <p><b>☕ Café & dulce:</b> <i>bocconotto</i> y café en las plazas de Locorotondo o Cisternino al atardecer.</p>
+    <div class="block"><span class="tag t-eat">🗺️ Montparnasse / 14e (tu 1ª base) · D1-D4</span>
+      <p><b>Comer:</b> crêperies bretonas en la <a class="map" href="https://www.google.com/maps/search/?api=1&query=Creperie+Josselin+Paris">Rue du Montparnasse</a> (galettes + crêpes, barato y típico); brasserie histórica <a class="map" href="https://www.google.com/maps/search/?api=1&query=La+Coupole+Montparnasse">La Coupole</a>; bistró clásico <a class="map" href="https://www.google.com/maps/search/?api=1&query=Josephine+Chez+Dumonet+Paris">Joséphine Chez Dumonet</a>. <span class="price mid">€€</span></p>
     </div>
 
-    <div class="block"><span class="tag t-eat">🗺️ Polignano a Mare · D2</span>
-      <p><b>Típico:</b> pescado fresco y panini de mar con vista al acantilado.</p>
-      <p><b>⭐ Michelin:</b> <a class="map" href="https://www.google.com/maps/search/?api=1&query=Meraviglioso+Osteria+Moderna+Polignano">Meraviglioso Osteria Moderna</a> (en la guía).</p>
-      <p><b>☕ Café & dulce:</b> el famoso <a class="map" href="https://www.google.com/maps/search/?api=1&query=Super+Mago+del+Gelo+Mario+Campanella+Polignano">Caffè speciale di Polignano</a> ("Il Super Mago del Gelo"): espresso con limón, azúcar, amaretto y crema de leche. Imperdible.</p>
+    <div class="block"><span class="tag t-eat">🗺️ Le Marais (tu 2ª base) · D6-D8</span>
+      <p><b>Comer:</b> <a class="map" href="https://www.google.com/maps/search/?api=1&query=L+As+du+Fallafel+Paris">L'As du Fallafel</a> (falafel de culto), <a class="map" href="https://www.google.com/maps/search/?api=1&query=Cafe+des+Musees+Paris">Café des Musées</a> <span class="bib">Bib Gourmand</span> (beef bourguignon), <a class="map" href="https://www.google.com/maps/search/?api=1&query=Breizh+Cafe+Paris">Breizh Café</a> (las mejores crêpes), y el <a class="map" href="https://www.google.com/maps/search/?api=1&query=Marche+des+Enfants+Rouges">Marché des Enfants Rouges</a> (puestos de comida). <span class="price">€</span></p>
     </div>
 
-    <div class="block"><span class="tag t-eat">🗺️ Ostuni & Savelletri · D3 (de paso)</span>
-      <p><b>Típico:</b> <i>orecchiette</i>, verduras de huerta, <i>agnello</i> (cordero) y aceite de oliva de los olivares milenarios.</p>
-      <p><b>⭐ Michelin:</b> <a class="map" href="https://www.google.com/maps/search/?api=1&query=Osteria+Piazzetta+Cattedrale+Ostuni">Osteria Piazzetta Cattedrale</a> (Ostuni) <span class="bib">Bib Gourmand</span> · <a class="map" href="https://www.google.com/maps/search/?api=1&query=Cielo+La+Sommita+Ostuni">Cielo – La Sommità</a> (Ostuni) · <a class="map" href="https://www.google.com/maps/search/?api=1&query=Due+Camini+Borgo+Egnazia+Savelletri">Due Camini</a> (Borgo Egnazia, Savelletri) <span class="star">★</span>.</p>
-      <p><b>☕ Café & dulce:</b> <i>pasta di mandorla</i> y un café en la terraza blanca de Ostuni.</p>
+    <div class="block"><span class="tag t-eat">🗺️ Francés tradicional & barato (bouillons)</span>
+      <p>Los <i>bouillons</i> son cantinas históricas de cocina francesa a precios mínimos: <a class="map" href="https://www.google.com/maps/search/?api=1&query=Bouillon+Pigalle">Bouillon Pigalle</a> y <a class="map" href="https://www.google.com/maps/search/?api=1&query=Bouillon+Chartier+Paris">Bouillon Chartier</a> (huevo mayonesa, confit de canard, profiteroles). Sin reserva, hacé la cola. <span class="price">€</span></p>
     </div>
 
-    <div class="block"><span class="tag t-eat">🗺️ Lecce & el barroco · D3–D6</span>
-      <p><b>Típico:</b> <i>pasticciotto</i> (nació en Galatina, 1745), <i>rustico leccese</i> (hojaldre con bechamel y tomate), <i>ciceri e tria</i> y <i>spumone</i> salentino.</p>
-      <p><b>⭐ Michelin:</b> <a class="map" href="https://www.google.com/maps/search/?api=1&query=Bros+Lecce">Bros'</a> <span class="star">★</span> y <a class="map" href="https://www.google.com/maps/search/?api=1&query=Primo+Restaurant+Lecce">Primo</a> (en la guía) para una noche especial.</p>
-      <p><b>☕ Cafés:</b> <a class="map" href="https://www.google.com/maps/search/?api=1&query=Caffe+Alvino+Lecce">Caffè Alvino</a> (rey del pasticciotto y del <i>caffè leccese</i> con leche de almendra) y <a class="map" href="https://www.google.com/maps/search/?api=1&query=Martinucci+Laboratory+Lecce">Martinucci</a> (gelato, spumone y cannoli).</p>
+    <div class="block"><span class="tag t-eat">⭐ Michelin accesible</span>
+      <ul>
+        <li><a class="map" href="https://www.google.com/maps/search/?api=1&query=Cafe+des+Musees+Paris">Café des Musées</a> (Marais). <span class="bib">Bib Gourmand</span> <span class="price mid">€€</span></li>
+        <li><a class="map" href="https://www.google.com/maps/search/?api=1&query=Les+Arlots+Paris">Les Arlots</a> (cerca de Gare du Nord; la salchicha-puré es legendaria). <span class="bib">Bib Gourmand</span> <span class="price mid">€€</span></li>
+        <li><a class="map" href="https://www.google.com/maps/search/?api=1&query=Le+Grand+Bain+Paris">Le Grand Bain</a> (Belleville; platos €8-14). <span class="bib">Bib Gourmand</span> <span class="price mid">€€</span></li>
+      </ul>
     </div>
 
-    <div class="block"><span class="tag t-eat">🗺️ Salento adriático · D4 (Otranto)</span>
-      <p><b>Típico:</b> <i>pitta di patate</i>, <i>scapece</i> (pescado en escabeche con azafrán), <i>pucce</i> y <i>friselle</i> con tomate.</p>
-      <p><b>⭐ Michelin:</b> <a class="map" href="https://www.google.com/maps/search/?api=1&query=Masseria+Montelauro+Otranto">Masseria Montelauro / La Terra degli Ulivi</a> (afueras de Otranto, en la guía).</p>
-      <p><b>☕ Café & dulce:</b> <i>fruttone</i> (almendra y mermelada de membrillo bañado en chocolate) y un café frente al castillo.</p>
-    </div>
-
-    <div class="block"><span class="tag t-eat">🗺️ Salento jónico & el tacón · D5–D6</span>
-      <p><b>Típico:</b> el <i>gambero rosso di Gallipoli</i> (crudo, dulcísimo), <i>scapece gallipolina</i> y pescado del mercado.</p>
-      <p><b>⭐ Michelin:</b> <a class="map" href="https://www.google.com/maps/search/?api=1&query=Bros+Trattoria+Scorrano">Bros' Trattoria</a> (Scorrano) <span class="bib">Bib Gourmand</span>, horno a leña.</p>
-      <p><b>☕ Café & dulce:</b> <i>spumone</i> artesanal salentino frente al puerto al atardecer.</p>
-    </div>
-
-    <div class="block"><span class="tag t-eat">🗺️ Matera (Basilicata) · D7–D8</span>
-      <p><b>Típico:</b> <i>pane di Matera</i> IGP, <i>peperoni cruschi</i> (morrón seco crocante), <i>cavatelli/orecchiette</i> con cime di rapa, <i>crapiata</i> y la <i>pignata</i> (cordero a la cazuela).</p>
-      <p><b>⭐ Michelin:</b> <a class="map" href="https://www.google.com/maps/search/?api=1&query=Vitantonio+Lombardo+Matera">Vitantonio Lombardo</a> <span class="star">★</span> (en una cueva) · <a class="map" href="https://www.google.com/maps/search/?api=1&query=Osteria+La+Pignata+Matera">Osteria La Pignata</a> casera y accesible.</p>
-      <p><b>☕ Café & dulce:</b> un café en los Sassi al atardecer; <i>taralli</i> dulces y pane con aceite nuevo.</p>
+    <div class="block"><span class="tag t-eat">☕ Dulces, cafés & Fontainebleau</span>
+      <p>Macarons en <a class="map" href="https://www.google.com/maps/search/?api=1&query=Pierre+Herme+Paris">Pierre Hermé</a> o <a class="map" href="https://www.google.com/maps/search/?api=1&query=Laduree+Paris">Ladurée</a>; helado <a class="map" href="https://www.google.com/maps/search/?api=1&query=Berthillon+Paris">Berthillon</a>; cafés míticos <a class="map" href="https://www.google.com/maps/search/?api=1&query=Cafe+de+Flore+Paris">Café de Flore</a> y <a class="map" href="https://www.google.com/maps/search/?api=1&query=Les+Deux+Magots+Paris">Les Deux Magots</a>. En <b>Fontainebleau</b>: <i>Brie de Meaux</i> y el postre <i>Fontainebleau</i>.</p>
     </div>
 
   </div>
 
   <h3 class="sec" id="tips">💡 Saber antes de ir</h3>
   <div class="ref">
-    <div class="block" style="border-top:none"><span class="tag t-tip">Auto & ZTL</span><p>Los centros históricos son ZTL: no entres con el auto, multan por cámara. Parkings o zona azul fuera del casco y a pie.</p></div>
-    <div class="block"><span class="tag t-tip">Calor de julio</span><p>Mañana de playa/excursión + siesta o traslado al mediodía + pueblo al atardecer. Agua, gorra y calzado de agua para las calas de roca.</p></div>
-    <div class="block"><span class="tag t-tip">Reservas</span><p>Reservá con tiempo: barco de Polignano y las cenas más pedidas (Osteria Piazzetta Cattedrale, La Grotta nei Sassi). Las cocinas suelen cerrar 15-19:30.</p></div>
-    <div class="block"><span class="tag t-tip">Logística del día 11</span><p>Auto a devolver en Bari antes de las 17:00 y tren a Roma: salí de Matera con margen (a media mañana) y cargá nafta antes de entregar.</p></div>
+    <div class="block" style="border-top:none"><span class="tag t-tip">Cierres a tener en cuenta</span><p>Las <b>Catacumbas cierran lunes</b> (van domingo). Como no entran a museos, no te afectan los cierres del Louvre (martes) ni del Orsay (lunes). El <b>Centre Pompidou está cerrado por obras hasta ~2030</b>.</p></div>
+    <div class="block"><span class="tag t-tip">Reservas</span><p>Reservá con anticipación las <b>Catacumbas</b> (cupo y colas largas) y, si quieren subir, la <b>Torre Eiffel</b>. Notre-Dame es gratis (cola o reserva web).</p></div>
+    <div class="block"><span class="tag t-tip">Moverse</span><p>Sacá la <b>Navigo semanal</b> (transporte ilimitado lun-dom). A Fontainebleau, tren desde Gare de Lyon (~40 min). Ojo carteristas; pedí <i>"une carafe d'eau"</i> (agua gratis).</p></div>
+    <div class="block"><span class="tag t-tip">Vuelo del día 4</span><p>Confirmá el aeropuerto del vuelo a Bari (CDG/Orly/Beauvais). Estar ~2 h antes y sumar el traslado desde el Marais.</p></div>
   </div>
 
   <footer>
-    Ruta para tu viaje a Puglia · 4–11 julio · Monopoli → Lecce → Matera → Bari (tren a Roma).<br>
-    Precios y horarios orientativos, confirmá en el momento. ¡Buen viaje! 🇮🇹
+    París + Fontainebleau · 27 jun – 4 jul · arranque del viaje (París → Puglia → Roma → Buenos Aires).<br>
+    Precios y horarios orientativos, confirmá en el momento. ¡Bon voyage! 🗼
   </footer>
 </div>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
   var dayColors = {1:'#e63950',2:'#f08a24',3:'#cf9f12',4:'#2fa14b',5:'#0098a6',6:'#3a63d8',7:'#8a3ec4',8:'#9a6324'};
-  var typeIcon = {town:'🏛️', beach:'🏖️', exp:'🥾', eat:'🍝', michelin:'⭐', cafe:'☕', hotel:'🏨'};
+  var typeIcon = {town:'🏛️', exp:'🌅', shop:'🛍️', eat:'🍽️', michelin:'⭐', cafe:'☕', hotel:'🏨'};
   // [name, lat, lng, day, type, desc]
   var places = [
-    ["Bari (aeropuerto · retiro del auto)",41.1389,16.7606,1,"exp","Llegada 17:10, retiro del auto"],
-    ["Monopoli (centro & porto)",40.9512,17.3010,1,"town","Base 1 (4-6 jul): casco antiguo y puerto"],
-    ["🏨 Suite1212 Boutique Hotel (Monopoli)",40.9523,17.3036,1,"hotel","Hotel noches 4-6 jul · centro storico"],
-    ["Osteria Perricci (Monopoli)",40.9505,17.3000,1,"eat","Pescado clásico €€"],
-    ["Polignano a Mare",40.9960,17.2190,2,"town","Ciudad sobre el acantilado"],
-    ["Lama Monachile / Cala Porto",40.9963,17.2178,2,"beach","Cala icónica + tour en barco"],
-    ["Pescaria (Polignano)",40.9956,17.2210,2,"eat","Panini de pescado de culto €"],
-    ["Alberobello — trulli",40.7831,17.2372,2,"town","Rione Monti, mejor 17-18h"],
-    ["Locorotondo",40.7541,17.3263,2,"town","Borgo blanco redondo"],
-    ["Martina Franca",40.7053,17.3380,2,"town","Joya barroca del Valle d'Itria"],
-    ["Cisternino (fornello)",40.7392,17.4230,2,"eat","Cena de bombette al momento €"],
-    ["Grotte di Castellana",40.8793,17.1530,2,"exp","Cuevas, visita guiada ~16€"],
-    ["Orto (campo de Monopoli)",40.9400,17.2800,2,"michelin","Guía Michelin · producto pugliese"],
-    ["Pashà (Conversano)",40.9672,17.1130,2,"michelin","★ estrella · palazzo del s. XV"],
-    ["Angelo Sabatelli (Putignano)",40.8540,17.1210,2,"michelin","★ estrella · pugliese contemporánea"],
-    ["Cibus (Ceglie Messapica)",40.6470,17.5160,2,"michelin","Bib Gourmand · recetas pugliesas"],
-    ["Meraviglioso Osteria Moderna (Polignano)",40.9962,17.2185,2,"michelin","Guía Michelin"],
-    ["Caffè speciale di Polignano",40.9958,17.2180,2,"cafe","Il Super Mago del Gelo: café con limón y crema"],
-    ["Ostuni — Città Bianca",40.7290,17.5770,3,"town","Ciudad blanca (de paso a Lecce)"],
-    ["Egnazia (parque arqueológico)",40.8870,17.3940,3,"town","Opcional: ruinas romanas junto al mar"],
-    ["Lecce (centro storico)",40.3520,18.1720,3,"town","Base 2 (6-10 jul): barroco leccese"],
-    ["🏨 Palazzo Dei Dondoli (Lecce)",40.3504,18.1672,3,"hotel","Hotel noches 6-10 jul · Via Sozy Carafa 20/A"],
-    ["Osteria Piazzetta Cattedrale (Ostuni)",40.7300,17.5760,3,"michelin","Bib Gourmand · almuerzo de paso"],
-    ["Cielo – La Sommità (Ostuni)",40.7296,17.5762,3,"michelin","Guía Michelin · terraza ciudad blanca"],
-    ["Due Camini (Borgo Egnazia, Savelletri)",40.8872,17.3952,3,"michelin","★ estrella · de camino"],
-    ["Caffè Alvino (Lecce)",40.3567,18.1730,3,"cafe","Pasticciotto y caffè leccese €"],
-    ["Le Zie (Lecce)",40.3490,18.1760,3,"eat","Trattoria casareccia €€"],
-    ["Bros' (Lecce)",40.3520,18.1710,3,"michelin","★ estrella · degustación creativo"],
-    ["Primo Restaurant (Lecce)",40.3530,18.1650,3,"michelin","Guía Michelin"],
-    ["Martinucci (Lecce)",40.3525,18.1715,3,"cafe","Gelato, spumone y pasticciotto"],
-    ["Grotta della Poesía",40.2840,18.4290,4,"beach","De tu lista: piscina natural en la roca"],
-    ["Torre dell'Orso",40.2730,18.4275,4,"beach","De tu lista: arena y pinares con sombra"],
-    ["Torre Sant'Andrea",40.2620,18.4350,4,"beach","Faraglioni esculpidos, a un paso"],
-    ["Otranto",40.1470,18.4910,4,"town","Castillo + mosaico del Árbol de la Vida"],
-    ["Baia dei Turchi",40.1750,18.4500,4,"beach","De tu lista: pinares y agua transparente"],
-    ["Cava di Bauxite",40.1330,18.4830,4,"town","Cantera roja con laguna esmeralda"],
-    ["Faro di Punta Palascìa",40.1170,18.5170,4,"exp","Extremo más oriental de Italia"],
-    ["Masseria Montelauro (Otranto)",40.1600,18.4600,4,"eat","Cena entre olivos €€"],
-    ["Punta Prosciutto",40.2960,17.7290,5,"beach","De tu lista: arena blanca caribeña"],
-    ["Porto Cesareo",40.2600,17.8930,5,"beach","Alternativa de arena blanca"],
-    ["Gallipoli (centro storico)",40.0553,17.9760,5,"town","Isla amurallada, atardecer jónico"],
-    ["La Puritate (Gallipoli)",40.0560,17.9740,5,"eat","Pescado frente al mar €€"],
-    ["Grottaglie (extra)",40.5360,17.4340,5,"town","Extra opcional: barrio de la cerámica"],
-    ["Taranto (extra)",40.4760,17.2300,5,"town","Extra opcional: dos mares + museo MArTA"],
-    ["Pescoluse (Maldive del Salento)",39.8350,18.3000,6,"beach","De tu lista: arena clara, agua poco profunda"],
-    ["Santa Maria di Leuca",39.7960,18.3580,6,"beach","De tu lista: la punta del tacón, dos mares"],
-    ["Galatina",40.1730,18.1690,6,"town","Frescos Santa Caterina, cuna del pasticciotto"],
-    ["Nardò",40.1790,18.0330,6,"town","Plaza barroca preciosa, sin turistas"],
-    ["Bros' Trattoria (Scorrano)",40.0930,18.3010,6,"michelin","Bib Gourmand · horno a leña"],
-    ["Matera — Sassi",40.6664,16.6110,7,"town","Base 3 (10-11 jul): ciudad de piedra UNESCO"],
-    ["🏨 Conche Luxury Retreat (Matera)",40.6671,16.6098,7,"hotel","Hotel noche 10 jul · Vico delle Conche 12, en los Sassi"],
-    ["Belvedere Murgia Timone",40.6720,16.6210,7,"exp","Mejor vista de los Sassi al atardecer"],
-    ["La Grotta nei Sassi (Matera)",40.6660,16.6100,7,"eat","Cena en cueva €€"],
-    ["Vitantonio Lombardo (Matera)",40.6665,16.6105,7,"michelin","★ estrella · en una cueva"],
-    ["Bari Vecchia (antes del tren)",41.1290,16.8670,8,"town","Vuelta corta antes del tren a Roma"]
+    ["🏨 Depto Montparnasse (39 ter rue des Plantes)",48.8298,2.3225,1,"hotel","1ª base (27-30 jun) · 14e"],
+    ["Catacombes de Paris",48.8338,2.3324,2,"town","Osario subterráneo · reservar (cierra lunes)"],
+    ["Jardin du Luxembourg",48.8462,2.3372,2,"exp","El parque más querido de París"],
+    ["Panthéon (por fuera)",48.8462,2.3464,2,"town","Mausoleo de los grandes franceses"],
+    ["Shakespeare & Company",48.8525,2.3470,2,"town","Librería mítica del Barrio Latino"],
+    ["Notre-Dame de Paris",48.8530,2.3499,2,"town","Reabierta; entrada gratis"],
+    ["Sainte-Chapelle",48.8554,2.3450,2,"town","Vitrales góticos (entrada opcional)"],
+    ["Tour Montparnasse (mirador)",48.8421,2.3220,2,"exp","Vista 360° con la Torre Eiffel de frente"],
+    ["La Jacobine (Barrio Latino)",48.8534,2.3403,2,"eat","Clásico acogedor €€"],
+    ["Place du Trocadéro",48.8629,2.2876,3,"exp","La mejor postal de la Torre Eiffel"],
+    ["Tour Eiffel",48.8584,2.2945,3,"town","Reservá si querés subir"],
+    ["Champ de Mars",48.8556,2.2986,3,"exp","Parque ideal para picnic"],
+    ["Pont Alexandre III",48.8638,2.3134,3,"town","El puente más ornamentado"],
+    ["Les Invalides",48.8566,2.3126,3,"town","Tumba de Napoleón (por fuera)"],
+    ["Arc de Triomphe",48.8738,2.2950,3,"town","Terraza con vista a las 12 avenidas"],
+    ["Champs-Élysées",48.8698,2.3079,3,"town","La avenida + Ladurée"],
+    ["Place de la Concorde",48.8656,2.3212,3,"town","Obelisco egipcio"],
+    ["Jardin des Tuileries",48.8635,2.3275,3,"exp","Jardín entre Concorde y Louvre"],
+    ["Louvre (pirámide, por fuera)",48.8606,2.3376,3,"town","Lo ven por fuera: la pirámide de Pei"],
+    ["Palais Royal (Colonnes de Buren)",48.8636,2.3370,3,"town","Patio icónico de columnas"],
+    ["Place Vendôme",48.8675,2.3295,3,"town","Plaza del lujo y la columna Vendôme"],
+    ["Sacré-Cœur (Montmartre)",48.8867,2.3431,4,"town","Basílica + mirador"],
+    ["Place du Tertre",48.8865,2.3406,4,"town","La plaza de los pintores"],
+    ["Mur des Je t'aime",48.8842,2.3380,4,"town","'Te quiero' en 250 idiomas"],
+    ["Moulin Rouge (Pigalle)",48.8841,2.3322,4,"town","El cabaret icónico"],
+    ["Opéra Garnier",48.8719,2.3316,4,"town","La ópera de 'El fantasma'"],
+    ["Galeries Lafayette (terraza + shopping)",48.8738,2.3320,4,"shop","Cúpula + terraza gratis 360°"],
+    ["Bouillon Pigalle",48.8822,2.3375,4,"eat","Francés tradicional baratísimo €"],
+    ["Gare de Lyon (tren a Fontainebleau)",48.8443,2.3743,4,"exp","Tren a Fontainebleau ~40 min"],
+    ["Château de Fontainebleau",48.4020,2.6997,5,"town","Palacio UNESCO, hogar de reyes y Napoleón"],
+    ["Jardines & estanque de Fontainebleau",48.4005,2.7010,5,"exp","Jardines del château"],
+    ["Bosque de Fontainebleau (Gorges d'Apremont)",48.4200,2.6000,5,"exp","Senderos y boulder"],
+    ["Barbizon",48.4470,2.6050,5,"town","Pueblo de pintores (opcional)"],
+    ["Moret-sur-Loing",48.3740,2.8160,5,"town","Pueblo medieval junto al río (opcional)"],
+    ["🏨 Depto Le Marais (Place des Vosges)",48.8562563,2.3653624,6,"hotel","2ª base (2-4 jul) · 3e"],
+    ["Maison de Victor Hugo",48.8554,2.3660,6,"town","En la Place des Vosges (gratis)"],
+    ["Rue des Francs-Bourgeois (shopping)",48.8578,2.3620,6,"shop","Boutiques de diseño y vintage"],
+    ["BHV Marais",48.8573,2.3530,6,"shop","Gran tienda junto al Hôtel de Ville"],
+    ["L'As du Fallafel (Rue des Rosiers)",48.8575,2.3590,6,"eat","El mejor falafel de París €"],
+    ["Café des Musées (Marais)",48.8580,2.3650,6,"michelin","Bib Gourmand · beef bourguignon"],
+    ["Saint-Germain-des-Prés",48.8540,2.3340,7,"town","Cafés míticos de la Rive Gauche"],
+    ["Musée d'Orsay (por fuera)",48.8600,2.3266,7,"town","La antigua estación con el reloj gigante"],
+    ["Pont des Arts",48.8585,2.3375,7,"town","El puente peatonal de los candados"],
+    ["Pont Neuf",48.8575,2.3415,7,"town","El puente más antiguo de París"],
+    ["Île Saint-Louis (Berthillon)",48.8517,2.3570,7,"cafe","El mejor helado de París"],
+    ["Crucero por el Sena",48.8599,2.3040,7,"exp","Todos los íconos desde el agua"],
+    ["Château de Versalles (opcional)",48.8049,2.1204,7,"town","Día completo alternativo (RER C)"],
+    ["Marché des Enfants Rouges",48.8631,2.3625,8,"eat","Mercado cubierto más antiguo de París"],
+    ["Bouillon Chartier",48.8716,2.3430,8,"eat","Cantina histórica baratísima €"],
+    ["Les Arlots (Bib Gourmand)",48.8810,2.3520,8,"michelin","Bib Gourmand · salchicha-puré legendaria"],
+    ["Aeropuerto (vuelo a Bari 14:55)",49.0097,2.5479,8,"exp","Confirmá CDG/Orly/Beauvais en tu pasaje"]
   ];
 
-  var map = L.map('map',{scrollWheelZoom:false}).setView([40.6,17.7],8);
+  var map = L.map('map',{scrollWheelZoom:false}).setView([48.860,2.345],12);
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
-    maxZoom:18, attribution:'© OpenStreetMap'
+    maxZoom:19, attribution:'© OpenStreetMap'
   }).addTo(map);
 
   var markers = [];
-  var bounds = [];
+  var cityBounds = [];
   places.forEach(function(p){
     var name=p[0], lat=p[1], lng=p[2], day=p[3], type=p[4], desc=p[5];
     var color=dayColors[day];
@@ -474,10 +444,12 @@
     var html='<div class="pop"><span class="pop-day" style="background:'+color+'">DÍA '+day+'</span><br>'+
              '<b>'+name+'</b><br>'+desc+'<br><a href="'+g+'" target="_blank">Abrir en Google Maps ↗</a></div>';
     var m=L.marker([lat,lng],{icon:icon}).addTo(map).bindPopup(html);
-    m._day=day; m._type=type; markers.push(m); bounds.push([lat,lng]);
+    m._day=day; m._type=type; markers.push(m);
+    if(lat>48.78 && lat<48.95 && lng>2.20 && lng<2.45) cityBounds.push([lat,lng]); // solo París
   });
-  function fitAll(){ map.invalidateSize(); if(bounds.length) map.fitBounds(bounds,{padding:[40,40]}); }
-  fitAll(); setTimeout(fitAll,300); window.addEventListener('load',fitAll);
+
+  function fitCity(){ map.invalidateSize(); if(cityBounds.length) map.fitBounds(cityBounds,{padding:[40,40],maxZoom:13}); }
+  fitCity(); setTimeout(fitCity,300); window.addEventListener('load',fitCity);
 
   var btns=document.querySelectorAll('#filters button');
   btns.forEach(function(b){
@@ -487,11 +459,14 @@
       var d=b.getAttribute('data-day');
       var shown=[];
       markers.forEach(function(m){
-        var match = (d==='all') || (d==='gastro' ? (m._type==='michelin'||m._type==='cafe') : String(m._day)===d);
-        if(match){ if(!map.hasLayer(m)) m.addTo(map); shown.push(m.getLatLng()); }
+        var match = (d==='all') ? true
+                  : (d==='gastro' ? (m._type==='michelin'||m._type==='cafe'||m._type==='eat') : String(m._day)===d);
+        if(match){ if(!map.hasLayer(m)) m.addTo(map); if(d!=='all') shown.push(m.getLatLng()); }
         else { if(map.hasLayer(m)) map.removeLayer(m); }
       });
-      if(shown.length) map.fitBounds(shown,{padding:[50,50],maxZoom:12});
+      map.invalidateSize();
+      if(d==='all'){ if(cityBounds.length) map.fitBounds(cityBounds,{padding:[50,50],maxZoom:13}); }
+      else if(shown.length) map.fitBounds(shown,{padding:[50,50],maxZoom:14});
     });
   });
   map.on('click',function(){ map.scrollWheelZoom.enable(); });
