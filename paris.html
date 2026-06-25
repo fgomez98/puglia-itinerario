@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>París + Fontainebleau · Ruta + Mapa · 27 jun – 4 jul</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<style>
+  :root{
+    --sea:#2c4a7c; --sea-dark:#1d3358; --sand:#f1ece4; --ink:#22262e; --muted:#6a7280; --line:#e2ddd2;
+    --town:#2c4a7c; --eat:#8a6d1f; --exp:#5e8a3a; --shop:#b0398f;
+    --d1:#e63950; --d2:#f08a24; --d3:#cf9f12; --d4:#2fa14b; --d5:#0098a6; --d6:#3a63d8; --d7:#8a3ec4; --d8:#9a6324;
+    --shadow:0 8px 26px rgba(20,40,80,.12);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:linear-gradient(180deg,#e9eef6,#f6f2ea 320px);color:var(--ink);line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:920px;margin:0 auto;padding:0 16px 70px}
+  .topnav{max-width:920px;margin:0 auto;padding:10px 16px 0;display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+  .topnav a{text-decoration:none;font-size:13px;font-weight:700;color:var(--sea-dark);background:#fff;border:1px solid var(--line);border-radius:999px;padding:6px 13px}
+  .topnav a.cur{background:var(--sea);color:#fff;border-color:var(--sea)}
+  header.hero{background:linear-gradient(135deg,var(--sea-dark),var(--sea));color:#fff;
+    border-radius:0 0 26px 26px;padding:30px 22px 26px;box-shadow:var(--shadow);text-align:center;margin-top:10px}
+  .hero .kicker{letter-spacing:3px;text-transform:uppercase;font-size:12px;opacity:.85;margin:0}
+  .hero h1{margin:6px 0 4px;font-size:32px;font-weight:800}
+  .hero .sub{opacity:.92;font-size:15px;margin:0}
+  .facts{display:flex;flex-wrap:wrap;gap:9px;justify-content:center;margin-top:16px}
+  .facts span{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.25);padding:6px 12px;border-radius:999px;font-size:13px}
+  h3.sec{margin:32px 0 6px;font-size:22px;color:var(--sea-dark);display:flex;align-items:center;gap:9px}
+  .lead{color:var(--muted);font-size:14px;margin:2px 0 14px}
+  #map{height:460px;border-radius:18px;box-shadow:var(--shadow);border:1px solid var(--line);z-index:1}
+  .mapwrap{margin-top:10px}
+  .filters{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0 6px;align-items:center}
+  .filters button{border:1px solid var(--line);background:#fff;border-radius:9px;padding:6px 11px;font-size:13px;font-weight:700;cursor:pointer;color:var(--sea-dark)}
+  .filters button.active{background:var(--sea);color:#fff;border-color:var(--sea)}
+  .legend{display:flex;flex-wrap:wrap;gap:12px;margin:10px 0 0;font-size:12px;color:var(--muted)}
+  .legend b{color:var(--ink)}
+  .legend .k{display:inline-flex;align-items:center;gap:5px}
+  .pin{display:flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50% 50% 50% 0;
+    transform:rotate(-45deg);border:2px solid #fff;box-shadow:0 2px 5px rgba(0,0,0,.35);font-size:13px}
+  .pin span{transform:rotate(45deg)}
+  .leaflet-popup-content{margin:11px 13px;font-size:13.5px;line-height:1.45}
+  .leaflet-popup-content b{font-size:14.5px}
+  .pop-day{display:inline-block;color:#fff;font-size:10px;font-weight:800;letter-spacing:.5px;padding:2px 7px;border-radius:6px;margin-bottom:5px}
+  .pop a{color:var(--sea-dark);font-weight:700;text-decoration:none;border-bottom:1px dotted}
+  .note{background:#fff;border:1px solid var(--line);border-left:4px solid var(--sea);border-radius:12px;padding:14px 16px;margin:16px 0;font-size:14px;color:var(--muted);box-shadow:var(--shadow)}
+  .toc{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:8px 0}
+  .toc a{text-decoration:none;background:#fff;border:1px solid var(--line);color:var(--sea-dark);padding:7px 11px;border-radius:10px;font-size:13px;font-weight:700}
+  .toc a:hover{background:var(--sea);color:#fff;border-color:var(--sea)}
+  .day{background:#fff;border:1px solid var(--line);border-radius:16px;margin:15px 0;overflow:hidden;box-shadow:var(--shadow)}
+  .day>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:14px;padding:15px 17px;outline:none}
+  .day>summary::-webkit-details-marker{display:none}
+  .daynum{flex:0 0 auto;width:58px;height:58px;border-radius:13px;color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;font-weight:800;line-height:1.05}
+  .daynum small{font-size:9px;font-weight:700;opacity:.92;letter-spacing:.3px}
+  .daynum b{font-size:18px}
+  .dayhead{flex:1;min-width:0}
+  .dayhead h2{margin:0;font-size:17px}
+  .dayhead .route{margin:3px 0 0;font-size:12.5px;color:var(--muted)}
+  .badge{display:inline-block;font-size:10px;font-weight:800;letter-spacing:.4px;color:#fff;background:var(--sea);border-radius:6px;padding:2px 7px;margin-left:6px;vertical-align:middle}
+  .chev{flex:0 0 auto;color:var(--muted);transition:transform .2s;font-size:12px}
+  .day[open] .chev{transform:rotate(180deg)}
+  .daybody{padding:0 18px 16px}
+  .block{border-top:1px dashed var(--line);padding:12px 0 3px}
+  .tag{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;padding:3px 9px;border-radius:999px;color:#fff;margin-bottom:6px}
+  .t-town{background:var(--town)}.t-eat{background:var(--eat)}.t-exp{background:var(--exp)}.t-shop{background:var(--shop)}.t-tip{background:#5a6472}
+  .block p{margin:6px 0}.block ul{margin:6px 0;padding-left:18px}.block li{margin:5px 0}
+  a.map{color:var(--sea-dark);text-decoration:none;border-bottom:1px dotted var(--sea);font-weight:600}
+  a.map:hover{color:var(--sea)}
+  .price{font-size:11px;font-weight:700;color:#fff;background:var(--eat);border-radius:6px;padding:1px 6px;margin-left:3px;white-space:nowrap}
+  .price.mid{background:#b08400}.price.hi{background:#9a5b2a}
+  .bib{font-size:11px;font-weight:700;color:#7a1f1f;background:#fbe3df;border:1px solid #f0c4bc;border-radius:6px;padding:1px 6px;margin-left:3px;white-space:nowrap}
+  .star{color:#e0a106}
+  .ref{background:#fff;border:1px solid var(--line);border-radius:16px;padding:4px 18px 14px;box-shadow:var(--shadow);margin-top:8px}
+  .ref .block{border-top:1px dashed var(--line)}
+  .pill{display:inline-block;background:var(--sand);border:1px solid var(--line);border-radius:8px;padding:2px 8px;font-size:12px;margin:2px}
+  footer{text-align:center;color:var(--muted);font-size:12px;margin-top:30px}
+  @media(max-width:520px){.hero h1{font-size:24px}#map{height:380px}.dayhead h2{font-size:15px}}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <a href="paris.html" class="cur">🗼 París (27 jun–4 jul)</a>
+  <a href="index.html">🇮🇹 Puglia (4–11 jul)</a>
+  <a href="roma.html">🏛️ Roma (11–15 jul)</a>
+</nav>
+<header class="hero">
+  <p class="kicker">El comienzo del viaje</p>
+  <h1>París + Fontainebleau</h1>
+  <p class="sub">Sáb 27 jun (llegás 23:40) → Sáb 4 jul · Montparnasse → Fontainebleau → Le Marais</p>
+  <div class="facts">
+    <span>✈️ Llegada 23:40 (sáb 27)</span><span>🏛️ Clásicos de París</span>
+    <span>🏰 Fontainebleau</span><span>🥐 Bistrós & Bib Gourmand</span><span>✈️ Vuelo a Bari (sáb 4, 14:55)</span>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <h3 class="sec" id="mapa">🗺️ Mapa de toda la ruta</h3>
+  <p class="lead">Cada color = un día. Tocá un pin para ver qué es y abrir Google Maps. Filtrá por día (el D5 te lleva a Fontainebleau) o tocá <b>🍴 Gastro</b> para ver comidas, Michelin ⭐ y cafés ☕.</p>
+  <div class="mapwrap">
+    <div class="filters" id="filters">
+      <button data-day="all" class="active">Todo</button>
+      <button data-day="1">D1</button><button data-day="2">D2</button><button data-day="3">D3</button>
+      <button data-day="4">D4</button><button data-day="5">D5</button><button data-day="6">D6</button>
+      <button data-day="7">D7</button><button data-day="8">D8</button>
+      <button data-day="gastro">🍴 Gastro</button>
+    </div>
+    <div id="map"></div>
+    <div class="legend">
+      <span class="k"><b>Tipo:</b></span>
+      <span class="k">🏛️ atracción</span>
+      <span class="k">🌅 mirador / parque</span>
+      <span class="k">🍽️ comida</span>
+      <span class="k">⭐ Michelin</span>
+      <span class="k">☕ café/dulce</span>
+      <span class="k">🏨 base</span>
+    </div>
+  </div>
+
+  <h3 class="sec" id="ruta">🧭 La ruta, día por día</h3>
+  <p class="lead">Sigue el clásico de 4 días de París, repartido según tus dos bases (Montparnasse y, después de Fontainebleau, Le Marais) y ajustado a los días de cierre de los museos. El orden está pensado para no cruzar la ciudad de punta a punta.</p>
+
+  <div class="toc">
+    <a href="#d1">D1</a><a href="#d2">D2</a><a href="#d3">D3</a><a href="#d4">D4</a>
+    <a href="#d5">D5</a><a href="#d6">D6</a><a href="#d7">D7</a><a href="#d8">D8</a>
+    <a href="#gastro">🍴 Gastro</a><a href="#tips">💡 Tips</a>
+  </div>
+
+  <div class="note"><b>Cómo leer cada día:</b> 🥾 plan · 🏛️ qué ver · 🍽️ dónde comer · 💡 tip.
+  Precios por persona orientativos: <span class="price">€ &lt;20</span> <span class="price mid">€€ 20-40</span> <span class="price hi">€€€ 40+</span>. <span class="bib">Bib Gourmand</span> = Michelin buena relación precio-calidad (3 platos &lt; €40) · <span class="star">★</span> = estrella.</div>
+
+  <!-- D1 -->
+  <details class="day" id="d1" open>
+    <summary>
+      <div class="daynum" style="background:var(--d1)"><small>SÁB 27</small><b>D1</b></div>
+      <div class="dayhead"><h2>Llegada de noche <span class="badge">Montparnasse</span></h2><p class="route">Aterrizás 23:40 · al depto en el 14e · descanso</p></div>
+      <div class="chev">▼</div>
+    </summary>
+    <div class="daybody">
+      <div class="block"><span class="tag t-exp">🥾 Llegada</span>
+        <p>Después de un vuelo largo, aterrizás a las 23:40. Del aeropuerto a tu depto en <a class="map" href="https://www.google.com/maps/search/?api=1&query=39+ter+rue+des+Plantes+75014+Paris">39 ter rue des Plantes (Montparnasse, 14e)</a> en taxi/Uber o RER+metro. A descansar para arrancar con todo mañana.</p>
+      </div>
+      <div class="block"><span class="tag t-tip">💡 Tip</span><p>Comprá la <b>Navigo semanal</b> (transporte ilimitado lun-dom) ni bien puedas. Si te queda energía, la Torre Eiffel <b>centellea 5 min cada hora en punto</b> hasta la 1 am.</p></div>
+    </div>
+  </details>
+
+  <!-- D2 -->
+  <details class="day" id="d2">
+    <summary>
+      <div class="daynum" style="background:var(--d2)"><small>DOM 28</small><b>D2</b></div>
+      <div class="dayhead"><h2>París icónico · Torre Eiffel & los Campos <span class="badge">Montparnasse</span></h2><p class="route">Trocadéro · Torre Eiffel · Inválidos · Arco del Triunfo · Concorde</p></div>
+      <div class="chev">▼</div>
+    </summary>
+    <div class="daybody">
+      <div class="block"><span class="tag t-town">🏛️ Mañana</span>
+        <p>Empezá fuerte: la <a class="map" href="https://www.google.com/maps/search/?api=1&query=Place+du+Trocadero+Paris">Plaza de Trocadéro</a> (la mejor postal de la <a class="map" href="https://www.google.com/maps/search/?api=1&query=Tour+Eiffel">Torre Eiffel</a>), bajás por los jardines, cruzás al <a class="map" href="https://www.google.com/maps/search/?api=1&query=Champ+de+Mars+Paris">Campo de Marte</a> y subís a la Torre (reservá). Después el <a class="map" href="https://www.google.com/maps/search/?api=1&query=Pont+Alexandre+III">Pont Alexandre III</a> y <a class="map" href="https://www.google.com/maps/search/?api=1&query=Les+Invalides">Los Inválidos</a> (tumba de Napoleón).</p>
+      </div>
+      <div class="block"><span class="tag t-town">🏛️ Tarde</span>
+        <p><a class="map" href="https://www.google.com/maps/search/?api=1&query=Arc+de+Triomphe">Arco del Triunfo</a> (subí a la terraza), bajás por los <a class="map" href="https://www.google.com/maps/search/?api=1&query=Champs+Elysees">Campos Elíseos</a> hasta la <a class="map" href="https://www.google.com/maps/search/?api=1&query=Place+de+la+Concorde">Plaza de la Concordia</a> y el <a class="map" href="https://www.google.com/maps/search/?api=1&query=Jardin+des+Tuileries">Jardín de las Tullerías</a>.</p>
+      </div>
+      <div class="block"><span class="tag t-exp">🌅 Atardecer</span>
+        <p>Volvé al Trocadéro al anochecer para ver la Torre encenderse y centellear. Mágico.</p>
+      </div>
+      <div class="block"><span class="tag t-eat">🍽️ Comer</span>
+        <ul>
+          <li>Desayuno en café histórico: <a class="map" href="https://www.google.com/maps/search/?api=1&query=Cafe+de+Flore+Paris">Café de Flore</a> o <a class="map" href="https://www.google.com/maps/search/?api=1&query=Les+Deux+Magots+Paris">Les Deux Magots</a>. <span class="price mid">€€</span></li>
+          <li>Macarons en <a class="map" href="https://www.google.com/maps/search/?api=1&query=Laduree+Champs+Elysees">Ladurée</a> (Campos Elíseos). <span class="price">€</span></li>
+        </ul>
+      </div>
+      <div class="block"><span class="tag t-tip">💡 Tip</span><p>Reservá la Torre Eiffel online con días de anticipación (a la 2ª o 3ª planta). En los bistrós pedí <i>"une carafe d'eau"</i>: agua del grifo, gratis.</p></div>
+    </div>
+  </details>
+
+  <!-- D3 -->
+  <details class="day" id="d3">
+    <summary>
+      <div class="daynum" style="background:var(--d3)"><small>LUN 29</small><b>D3</b></div>
+      <div class="dayhead"><h2>Louvre, Île de la Cité & Barrio Latino <span class="badge">Montparnasse</span></h2><p class="route">Louvre · Sainte-Chapelle · Notre-Dame · Luxemburgo · Montparnasse</p></div>
+      <div class="chev">▼</div>
+    </summary>
+    <div class="daybody">
+      <div class="block"><span class="tag t-town">🏛️ Mañana</span>
+        <p>El <a class="map" href="https://www.google.com/maps/search/?api=1&query=Musee+du+Louvre">Louvre</a> a primera hora (Mona Lisa, Venus de Milo, Victoria de Samotracia; recorrido de 2-3 h). Cruzás a la <a class="map" href="https://www.google.com/maps/search/?api=1&query=Sainte+Chapelle+Paris">Sainte-Chapelle</a> (vitrales impresionantes) y a <a class="map" href="https://www.google.com/maps/search/?api=1&query=Notre+Dame+de+Paris">Notre-Dame</a> (reabierta tras la restauración).</p>
+      </div>
+      <div class="block"><span class="tag t-town">🏛️ Tarde</span>
+        <p><a class="map" href="https://www.google.com/maps/search/?api=1&query=Quartier+Latin+Paris">Barrio Latino</a> (la librería <a class="map" href="https://www.google.com/maps/search/?api=1&query=Shakespeare+and+Company+Paris">Shakespeare & Co</a>), el <a class="map" href="https://www.google.com/maps/search/?api=1&query=Pantheon+Paris">Panthéon</a> y los <a class="map" href="https://www.google.com/maps/search/?api=1&query=Jardin+du+Luxembourg">Jardines de Luxemburgo</a>.</p>
+      </div>
+      <div class="block"><span class="tag t-exp">🌅 Atardecer</span>
+        <p>Subí a la <a class="map" href="https://www.google.com/maps/search/?api=1&query=Tour+Montparnasse">Torre Montparnasse</a> (a pasos de tu depto): vista 360° con la Torre Eiffel de frente; muchos la prefieren porque la foto incluye la Eiffel.</p>
+      </div>
+      <div class="block"><span class="tag t-eat">🍽️ Comer</span>
+        <ul>
+          <li><a class="map" href="https://www.google.com/maps/search/?api=1&query=La+Jacobine+Paris">La Jacobine</a> (Barrio Latino) — clásico acogedor. <span class="price mid">€€</span></li>
+          <li>Ramen en <a class="map" href="https://www.google.com/maps/search/?api=1&query=Kodawari+Ramen+Paris">Kodawari</a>, si querés cambiar. <span class="price">€</span></li>
+        </ul>
+      </div>
+      <div class="block"><span class="tag t-tip">💡 Tip</span><p>Reservá el Louvre con acceso prioritario (las colas superan las 2 h). El Louvre cierra los martes, por eso va hoy lunes; el Orsay cierra los lunes, lo dejamos para más adelante.</p></div>
+    </div>
+  </details>
+
+  <!-- D4 -->
+  <details class="day" id="d4">
+    <summary>
+      <div class="daynum" style="background:var(--d4)"><small>MAR 30</small><b>D4</b></div>
+      <div class="dayhead"><h2>Montmartre & Ópera → tren a Fontainebleau <span class="badge">traslado</span></h2><p class="route">Sacré-Cœur · Ópera Garnier · Lafayette · tren de la tarde</p></div>
+      <div class="chev">▼</div>
+    </summary>
+    <div class="daybody">
+      <div class="block"><span class="tag t-town">🏛️ Mañana</span>
+        <p><a class="map" href="https://www.google.com/maps/search/?api=1&query=Montmartre+Paris">Montmartre</a>: el <a class="map" href="https://www.google.com/maps/search/?api=1&query=Sacre+Coeur">Sacré-Cœur</a> y su mirador, la <a class="map" href="https://www.google.com/maps/search/?api=1&query=Place+du+Tertre">Place du Tertre</a> (pintores) y el <a class="map" href="https://www.google.com/maps/search/?api=1&query=Mur+des+Je+t+aime">Muro de los "Te quiero"</a>.</p>
+      </div>
+      <div class="block"><span class="tag t-town">🏛️ Mediodía</span>
+        <p>Bajás a la <a class="map" href="https://www.google.com/maps/search/?api=1&query=Opera+Garnier">Ópera Garnier</a> y la terraza gratis de las <a class="map" href="https://www.google.com/maps/search/?api=1&query=Galeries+Lafayette+Haussmann">Galerías Lafayette</a> (cúpula Art Nouveau + vista 360°).</p>
+      </div>
+      <div class="block"><span class="tag t-exp">🥾 Tarde-noche · a Fontainebleau</span>
+        <p>Volvés al depto por las valijas y tomás el tren desde <a class="map" href="https://www.google.com/maps/search/?api=1&query=Gare+de+Lyon+Paris">Gare de Lyon</a> a Fontainebleau (~40 min). Check-in en el hotel.</p>
+      </div>
+      <div class="block"><span class="tag t-eat">🍽️ Comer</span>
+        <ul>
+          <li><a class="map" href="https://www.google.com/maps/search/?api=1&query=Bouillon+Pigalle">Bouillon Pigalle</a> — cocina francesa tradicional, riquísima y baratísima (suele haber cola). <span class="price">€</span></li>
+          <li><a class="map" href="https://www.google.com/maps/search/?api=1&query=Le+Relais+Gascon+Montmartre">Le Relais Gascon</a> (Montmartre) — ensaladas gigantes con papas al ajo. <span class="price">€</span></li>
+        </ul>
+      </div>
+      <div class="block"><span class="tag t-tip">💡 Tip</span><p>Hoy es martes: el Louvre cierra (ya lo hiciste) y Montmartre es al aire libre, perfecto. Salí con tiempo a Gare de Lyon para el tren con las valijas.</p></div>
+    </div>
+  </details>
+
+  <!-- D5 -->
+  <details class="day" id="d5">
+    <summary>
+      <div class="daynum" style="background:var(--d5)"><small>MIÉ 1</small><b>D5</b></div>
+      <div class="dayhead"><h2>Fontainebleau <span class="badge">château & bosque</span></h2><p class="route">Palacio UNESCO · jardines · bosque o pueblo</p></div>
+      <div class="chev">▼</div>
+    </summary>
+    <div class="daybody">
+      <div class="block"><span class="tag t-town">🏛️ Mañana</span>
+        <p>El <a class="map" href="https://www.google.com/maps/search/?api=1&query=Chateau+de+Fontainebleau">Château de Fontainebleau</a> (Patrimonio UNESCO): 1.500 habitaciones con mobiliario casi intacto, hogar de reyes de Francia y de Napoleón. Dedicale medio día, sumando los <a class="map" href="https://www.google.com/maps/search/?api=1&query=Jardins+du+Chateau+de+Fontainebleau">jardines y el estanque</a>.</p>
+      </div>
+      <div class="block"><span class="tag t-exp">🌅 Tarde</span>
+        <p>El <a class="map" href="https://www.google.com/maps/search/?api=1&query=Foret+de+Fontainebleau+Gorges+d+Apremont">bosque de Fontainebleau</a> (senderos, las Gorges d'Apremont, escalada de boulder) o el pueblo, con sus calles adoquinadas y cafés. <i>Opcional:</i> el pueblo de pintores <a class="map" href="https://www.google.com/maps/search/?api=1&query=Barbizon">Barbizon</a> o el precioso <a class="map" href="https://www.google.com/maps/search/?api=1&query=Moret-sur-Loing">Moret-sur-Loing</a>.</p>
+      </div>
+      <div class="block"><span class="tag t-eat">🍽️ Comer</span>
+        <ul>
+          <li>Probá lo local: el queso <i>Brie de Meaux</i> y el postre de crema <i>"Fontainebleau"</i>. Restos y cafés en el centro del pueblo. <span class="price mid">€€</span></li>
+        </ul>
+      </div>
+      <div class="block"><span class="tag t-tip">💡 Tip</span><p>El château abre ~9:30; andá temprano para evitar grupos. Cierra los martes (vas miércoles, todo bien). Ideal alquilar bici para combinar palacio + bosque.</p></div>
+    </div>
+  </details>
+
+  <!-- D6 -->
+  <details class="day" id="d6">
+    <summary>
+      <div class="daynum" style="background:var(--d6)"><small>JUE 2</small><b>D6</b></div>
+      <div class="dayhead"><h2>Vuelta a París · Le Marais <span class="badge">Marais</span></h2><p class="route">Regreso a la mañana · check-in Place des Vosges · tarde en el Marais</p></div>
+      <div class="chev">▼</div>
+    </summary>
+    <div class="daybody">
+      <div class="block"><span class="tag t-exp">🥾 Mañana</span>
+        <p>Tren de vuelta a París y check-in en tu depto de la <a class="map" href="https://www.google.com/maps/search/?api=1&query=Place+des+Vosges+Paris">Place des Vosges</a> (Le Marais, 3e) — la plaza más antigua y elegante de París.</p>
+      </div>
+      <div class="block"><span class="tag t-town">🏛️ Tarde</span>
+        <p>A explorar tu nuevo barrio: la <a class="map" href="https://www.google.com/maps/search/?api=1&query=Maison+de+Victor+Hugo+Paris">Maison de Victor Hugo</a> (en la plaza), el <a class="map" href="https://www.google.com/maps/search/?api=1&query=Musee+Picasso+Paris">Musée Picasso</a> (abre jueves), la <a class="map" href="https://www.google.com/maps/search/?api=1&query=Rue+des+Rosiers+Paris">Rue des Rosiers</a> (corazón judío del barrio) y las callecitas de boutiques.</p>
+      </div>
+      <div class="block"><span class="tag t-eat">🍽️ Comer</span>
+        <ul>
+          <li><a class="map" href="https://www.google.com/maps/search/?api=1&query=L+As+du+Fallafel+Paris">L'As du Fallafel</a> (Rue des Rosiers) — el mejor falafel de París, barato y de culto. <span class="price">€</span></li>
+          <li><a class="map" href="https://www.google.com/maps/search/?api=1&query=Cafe+des+Musees+Paris">Café des Musées</a> — bistró de 1924; su <i>beef bourguignon</i> fue elegido el mejor de París. <span class="bib">Bib Gourmand</span> <span class="price mid">€€</span></li>
+        </ul>
+      </div>
+      <div class="block"><span class="tag t-tip">💡 Tip</span><p>El <b>Centre Pompidou está cerrado por obras</b> (reabre hacia 2030), así que no cuenta para este viaje. El Marais se camina entero y es ideal de noche.</p></div>
+    </div>
+  </details>
+
+  <!-- D7 -->
+  <details class="day" id="d7">
+    <summary>
+      <div class="daynum" style="background:var(--d7)"><small>VIE 3</small><b>D7</b></div>
+      <div class="dayhead"><h2>Rive Gauche & Sena <span class="badge">Marais</span></h2><p class="route">Orsay · Saint-Germain · Île Saint-Louis · crucero (o Versalles)</p></div>
+      <div class="chev">▼</div>
+    </summary>
+    <div class="daybody">
+      <div class="block"><span class="tag t-town">🏛️ Mañana</span>
+        <p>El <a class="map" href="https://www.google.com/maps/search/?api=1&query=Musee+d+Orsay">Musée d'Orsay</a> (impresionistas: Van Gogh, Monet, Renoir; abre viernes), en la antigua estación de tren con el reloj gigante.</p>
+      </div>
+      <div class="block"><span class="tag t-town">🏛️ Tarde</span>
+        <p><a class="map" href="https://www.google.com/maps/search/?api=1&query=Saint-Germain-des-Pres">Saint-Germain-des-Prés</a> (cafés míticos), la <a class="map" href="https://www.google.com/maps/search/?api=1&query=Ile+Saint-Louis+Paris">Île Saint-Louis</a> con su helado <a class="map" href="https://www.google.com/maps/search/?api=1&query=Berthillon+Paris">Berthillon</a>, y un <a class="map" href="https://www.google.com/maps/search/?api=1&query=Bateaux+Mouches+Paris">crucero por el Sena</a> al atardecer.</p>
+      </div>
+      <div class="block"><span class="tag t-exp">🥾 Alternativa de día completo</span>
+        <p>Si quieren otro palacio: <a class="map" href="https://www.google.com/maps/search/?api=1&query=Chateau+de+Versailles">Versalles</a> (abre viernes; RER C, ~40 min). Reservar sí o sí y salir temprano.</p>
+      </div>
+      <div class="block"><span class="tag t-eat">🍽️ Comer</span>
+        <ul>
+          <li>Café histórico en Saint-Germain: <a class="map" href="https://www.google.com/maps/search/?api=1&query=Les+Deux+Magots+Paris">Les Deux Magots</a>. <span class="price mid">€€</span></li>
+          <li>Helado <a class="map" href="https://www.google.com/maps/search/?api=1&query=Berthillon+Paris">Berthillon</a> en la Île Saint-Louis. <span class="price">€</span></li>
+        </ul>
+      </div>
+      <div class="block"><span class="tag t-tip">💡 Tip</span><p>El Orsay abre hasta tarde algunos días: chequeá el horario nocturno. Si elegís Versalles, dejá el resto de París para mañana a la mañana.</p></div>
+    </div>
+  </details>
+
+  <!-- D8 -->
+  <details class="day" id="d8">
+    <summary>
+      <div class="daynum" style="background:var(--d8)"><small>SÁB 4</small><b>D8</b></div>
+      <div class="dayhead"><h2>Última mañana → vuelo a Bari</h2><p class="route">Marais & mercado · al aeropuerto · vuelo 14:55</p></div>
+      <div class="chev">▼</div>
+    </summary>
+    <div class="daybody">
+      <div class="block"><span class="tag t-town">🏛️ Mañana</span>
+        <p>Croissant de despedida en una <i>boulangerie</i> y una vuelta por el <a class="map" href="https://www.google.com/maps/search/?api=1&query=Marche+des+Enfants+Rouges">Marché des Enfants Rouges</a> (el mercado cubierto más antiguo de París) o las callecitas del Marais.</p>
+      </div>
+      <div class="block"><span class="tag t-exp">🥾 Cierre · al aeropuerto</span>
+        <p>Al mediodía salís al aeropuerto para el vuelo de las <b>14:55 a Bari</b> (llega 17:10, donde empieza la parte de Puglia 🇮🇹).</p>
+      </div>
+      <div class="block"><span class="tag t-tip">💡 Tip</span><p><b>Confirmá tu aeropuerto</b> en el pasaje (los vuelos a Bari salen de CDG, Orly o Beauvais). Para un vuelo europeo, estar ~2 h antes; sumale el traslado desde el Marais (40-60 min).</p></div>
+    </div>
+  </details>
+
+  <!-- GASTRO -->
+  <h3 class="sec" id="gastro">🍴 Gastronomía — Michelin, bistrós y lo típico</h3>
+  <p class="lead">Qué comer y dónde, por barrio. <span class="bib">Bib Gourmand</span> = rico y accesible (3 platos &lt; €40) · <span class="star">★</span> = ocasión especial.</p>
+  <div class="ref">
+
+    <div class="block" style="border-top:none"><span class="tag t-eat">🍽️ Imprescindibles franceses</span>
+      <p><span class="pill">Croissant / pain au chocolat</span><span class="pill">Baguette</span><span class="pill">Steak frites</span><span class="pill">Confit de canard</span><span class="pill">Escargots</span><span class="pill">Soupe à l'oignon</span><span class="pill">Croque-monsieur</span><span class="pill">Crêpe & galette</span><span class="pill">Quiche lorraine</span><span class="pill">Macaron</span><span class="pill">Éclair</span><span class="pill">Fromages</span></p>
+    </div>
+
+    <div class="block"><span class="tag t-eat">🗺️ Montparnasse / 14e (tu 1ª base) · D1-D4</span>
+      <p><b>Comer:</b> crêperies bretonas en la <a class="map" href="https://www.google.com/maps/search/?api=1&query=Creperie+Josselin+Paris">Rue du Montparnasse</a> (galettes saladas + crêpes dulces, barato y típico); brasserie histórica <a class="map" href="https://www.google.com/maps/search/?api=1&query=La+Coupole+Montparnasse">La Coupole</a>; bistró clásico <a class="map" href="https://www.google.com/maps/search/?api=1&query=Josephine+Chez+Dumonet+Paris">Joséphine Chez Dumonet</a>. <span class="price mid">€€</span></p>
+    </div>
+
+    <div class="block"><span class="tag t-eat">🗺️ Le Marais (tu 2ª base) · D6-D8</span>
+      <p><b>Comer:</b> <a class="map" href="https://www.google.com/maps/search/?api=1&query=L+As+du+Fallafel+Paris">L'As du Fallafel</a> (falafel de culto), <a class="map" href="https://www.google.com/maps/search/?api=1&query=Cafe+des+Musees+Paris">Café des Musées</a> <span class="bib">Bib Gourmand</span> (beef bourguignon), <a class="map" href="https://www.google.com/maps/search/?api=1&query=Breizh+Cafe+Paris">Breizh Café</a> (las mejores crêpes), y el <a class="map" href="https://www.google.com/maps/search/?api=1&query=Marche+des+Enfants+Rouges">Marché des Enfants Rouges</a> (puestos de comida). <span class="price">€</span></p>
+    </div>
+
+    <div class="block"><span class="tag t-eat">🗺️ Francés tradicional & barato (bouillons)</span>
+      <p>Los <i>bouillons</i> son cantinas históricas de cocina francesa a precios mínimos: <a class="map" href="https://www.google.com/maps/search/?api=1&query=Bouillon+Pigalle">Bouillon Pigalle</a> y <a class="map" href="https://www.google.com/maps/search/?api=1&query=Bouillon+Chartier+Paris">Bouillon Chartier</a> (huevo mayonesa, confit de canard, profiteroles). Sin reserva, hacé la cola. <span class="price">€</span></p>
+    </div>
+
+    <div class="block"><span class="tag t-eat">⭐ Michelin accesible</span>
+      <ul>
+        <li><a class="map" href="https://www.google.com/maps/search/?api=1&query=Cafe+des+Musees+Paris">Café des Musées</a> (Marais). <span class="bib">Bib Gourmand</span> <span class="price mid">€€</span></li>
+        <li><a class="map" href="https://www.google.com/maps/search/?api=1&query=Les+Arlots+Paris">Les Arlots</a> (cerca de Gare du Nord; la salchicha-puré es legendaria). <span class="bib">Bib Gourmand</span> <span class="price mid">€€</span></li>
+        <li><a class="map" href="https://www.google.com/maps/search/?api=1&query=Le+Grand+Bain+Paris">Le Grand Bain</a> (Belleville; platos €8-14). <span class="bib">Bib Gourmand</span> <span class="price mid">€€</span></li>
+      </ul>
+    </div>
+
+    <div class="block"><span class="tag t-eat">☕ Dulces, cafés & Fontainebleau</span>
+      <p>Macarons en <a class="map" href="https://www.google.com/maps/search/?api=1&query=Pierre+Herme+Paris">Pierre Hermé</a> o <a class="map" href="https://www.google.com/maps/search/?api=1&query=Laduree+Paris">Ladurée</a>; helado <a class="map" href="https://www.google.com/maps/search/?api=1&query=Berthillon+Paris">Berthillon</a>; cafés míticos <a class="map" href="https://www.google.com/maps/search/?api=1&query=Cafe+de+Flore+Paris">Café de Flore</a> y <a class="map" href="https://www.google.com/maps/search/?api=1&query=Les+Deux+Magots+Paris">Les Deux Magots</a>. En <b>Fontainebleau</b>: <i>Brie de Meaux</i> y el postre de crema <i>Fontainebleau</i>.</p>
+    </div>
+
+  </div>
+
+  <h3 class="sec" id="tips">💡 Saber antes de ir</h3>
+  <div class="ref">
+    <div class="block" style="border-top:none"><span class="tag t-tip">Días de cierre</span><p>El <b>Louvre cierra martes</b>, el <b>Orsay y el Picasso cierran lunes</b>, <b>Versalles cierra lunes</b>. El <b>Centre Pompidou está cerrado por obras hasta ~2030</b>. La ruta ya está ordenada para esquivarlos.</p></div>
+    <div class="block"><span class="tag t-tip">Entradas</span><p>Reservá con anticipación <b>Torre Eiffel</b>, <b>Louvre</b> (acceso prioritario), <b>Catacumbas</b> y, si vas, <b>Versalles</b>. Notre-Dame es gratis (cola o reserva web).</p></div>
+    <div class="block"><span class="tag t-tip">Moverse</span><p>Sacá la <b>Navigo semanal</b> (transporte ilimitado lun-dom). A Fontainebleau, tren desde Gare de Lyon (~40 min). Ojo carteristas en metro y zonas turísticas; pedí <i>"une carafe d'eau"</i> (agua gratis).</p></div>
+    <div class="block"><span class="tag t-tip">Vuelo del día 4</span><p>Confirmá el aeropuerto del vuelo a Bari (CDG/Orly/Beauvais). Estar ~2 h antes y sumar el traslado desde el Marais.</p></div>
+  </div>
+
+  <footer>
+    París + Fontainebleau · 27 jun – 4 jul · arranque del viaje (París → Puglia → Roma → Buenos Aires).<br>
+    Precios y horarios orientativos, confirmá en el momento. ¡Bon voyage! 🗼
+  </footer>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+  var dayColors = {1:'#e63950',2:'#f08a24',3:'#cf9f12',4:'#2fa14b',5:'#0098a6',6:'#3a63d8',7:'#8a3ec4',8:'#9a6324'};
+  var typeIcon = {town:'🏛️', exp:'🌅', eat:'🍽️', michelin:'⭐', cafe:'☕', hotel:'🏨'};
+  // [name, lat, lng, day, type, desc]
+  var places = [
+    ["🏨 Depto Montparnasse (39 ter rue des Plantes)",48.8298,2.3225,1,"hotel","1ª base (27-30 jun) · 14e"],
+    ["Place du Trocadéro",48.8629,2.2876,2,"exp","La mejor postal de la Torre Eiffel"],
+    ["Tour Eiffel",48.8584,2.2945,2,"town","Reservá la subida"],
+    ["Champ de Mars",48.8556,2.2986,2,"exp","Parque ideal para picnic"],
+    ["Pont Alexandre III",48.8638,2.3134,2,"town","El puente más ornamentado"],
+    ["Les Invalides",48.8566,2.3126,2,"town","Tumba de Napoleón"],
+    ["Arc de Triomphe",48.8738,2.2950,2,"town","Terraza con vista a las 12 avenidas"],
+    ["Champs-Élysées",48.8698,2.3079,2,"town","La avenida + Ladurée"],
+    ["Place de la Concorde",48.8656,2.3212,2,"town","Obelisco egipcio"],
+    ["Jardin des Tuileries",48.8635,2.3275,2,"exp","Jardín entre Concorde y Louvre"],
+    ["Café de Flore (Saint-Germain)",48.8542,2.3328,2,"cafe","Café histórico para desayunar"],
+    ["Musée du Louvre",48.8606,2.3376,3,"town","Abre lunes; reservá acceso prioritario"],
+    ["Sainte-Chapelle",48.8554,2.3450,3,"town","Vitrales góticos impresionantes"],
+    ["Notre-Dame de Paris",48.8530,2.3499,3,"town","Reabierta tras la restauración"],
+    ["Shakespeare & Company",48.8525,2.3470,3,"town","Librería mítica del Barrio Latino"],
+    ["Panthéon",48.8462,2.3464,3,"town","Tumbas de Voltaire, Hugo, Curie"],
+    ["Jardin du Luxembourg",48.8462,2.3372,3,"exp","El parque más querido de París"],
+    ["Tour Montparnasse (mirador)",48.8421,2.3220,3,"exp","Vista 360° con la Torre Eiffel de frente"],
+    ["La Jacobine (Barrio Latino)",48.8534,2.3403,3,"eat","Clásico acogedor €€"],
+    ["Sacré-Cœur (Montmartre)",48.8867,2.3431,4,"town","Basílica + mirador"],
+    ["Place du Tertre",48.8865,2.3406,4,"town","La plaza de los pintores"],
+    ["Mur des Je t'aime",48.8842,2.3380,4,"town","'Te quiero' en 250 idiomas"],
+    ["Opéra Garnier",48.8719,2.3316,4,"town","La ópera de 'El fantasma'"],
+    ["Galeries Lafayette (terraza)",48.8738,2.3320,4,"exp","Cúpula + terraza gratis 360°"],
+    ["Bouillon Pigalle",48.8822,2.3375,4,"eat","Francés tradicional baratísimo €"],
+    ["Gare de Lyon (tren a Fontainebleau)",48.8443,2.3743,4,"exp","Tren a Fontainebleau ~40 min"],
+    ["Château de Fontainebleau",48.4020,2.6997,5,"town","Palacio UNESCO, hogar de reyes y Napoleón"],
+    ["Jardines & estanque de Fontainebleau",48.4005,2.7010,5,"exp","Jardines del château"],
+    ["Bosque de Fontainebleau (Gorges d'Apremont)",48.4200,2.6000,5,"exp","Senderos y boulder"],
+    ["Barbizon",48.4470,2.6050,5,"town","Pueblo de pintores (opcional)"],
+    ["Moret-sur-Loing",48.3740,2.8160,5,"town","Pueblo medieval junto al río (opcional)"],
+    ["🏨 Depto Le Marais (Place des Vosges)",48.8562563,2.3653624,6,"hotel","2ª base (2-4 jul) · 3e"],
+    ["Maison de Victor Hugo",48.8554,2.3660,6,"town","En la Place des Vosges"],
+    ["Musée Picasso",48.8598,2.3625,6,"town","Abre jueves (cierra lunes)"],
+    ["L'As du Fallafel (Rue des Rosiers)",48.8575,2.3590,6,"eat","El mejor falafel de París €"],
+    ["Café des Musées (Marais)",48.8580,2.3650,6,"michelin","Bib Gourmand · beef bourguignon"],
+    ["Musée d'Orsay",48.8600,2.3266,7,"town","Impresionistas; abre viernes (cierra lunes)"],
+    ["Saint-Germain-des-Prés",48.8540,2.3340,7,"town","Cafés míticos de la Rive Gauche"],
+    ["Île Saint-Louis (Berthillon)",48.8517,2.3570,7,"cafe","El mejor helado de París"],
+    ["Château de Versalles (opcional)",48.8049,2.1204,7,"town","Día completo alternativo (RER C)"],
+    ["Marché des Enfants Rouges",48.8631,2.3625,8,"eat","Mercado cubierto más antiguo de París"],
+    ["Bouillon Chartier",48.8716,2.3430,8,"eat","Cantina histórica baratísima €"],
+    ["Les Arlots (Bib Gourmand)",48.8810,2.3520,8,"michelin","Bib Gourmand · salchicha-puré legendaria"],
+    ["Aeropuerto (vuelo a Bari 14:55)",49.0097,2.5479,8,"exp","Confirmá CDG/Orly/Beauvais en tu pasaje"]
+  ];
+
+  var map = L.map('map',{scrollWheelZoom:false}).setView([48.860,2.345],12);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
+    maxZoom:19, attribution:'© OpenStreetMap'
+  }).addTo(map);
+
+  var markers = [];
+  var cityBounds = [];
+  places.forEach(function(p){
+    var name=p[0], lat=p[1], lng=p[2], day=p[3], type=p[4], desc=p[5];
+    var color=dayColors[day];
+    var icon = L.divIcon({
+      className:'', iconSize:[26,26], iconAnchor:[13,26], popupAnchor:[0,-24],
+      html:'<div class="pin" style="background:'+color+'"><span>'+typeIcon[type]+'</span></div>'
+    });
+    var g='https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(name);
+    var html='<div class="pop"><span class="pop-day" style="background:'+color+'">DÍA '+day+'</span><br>'+
+             '<b>'+name+'</b><br>'+desc+'<br><a href="'+g+'" target="_blank">Abrir en Google Maps ↗</a></div>';
+    var m=L.marker([lat,lng],{icon:icon}).addTo(map).bindPopup(html);
+    m._day=day; m._type=type; markers.push(m);
+    if(lat>48.78 && lat<48.95 && lng>2.20 && lng<2.45) cityBounds.push([lat,lng]); // solo París, excluye Fontainebleau/Versalles/aeropuerto
+  });
+
+  function fitCity(){ map.invalidateSize(); if(cityBounds.length) map.fitBounds(cityBounds,{padding:[40,40],maxZoom:13}); }
+  fitCity(); setTimeout(fitCity,300); window.addEventListener('load',fitCity);
+
+  var btns=document.querySelectorAll('#filters button');
+  btns.forEach(function(b){
+    b.addEventListener('click',function(){
+      btns.forEach(function(x){x.classList.remove('active')});
+      b.classList.add('active');
+      var d=b.getAttribute('data-day');
+      var shown=[];
+      markers.forEach(function(m){
+        var match = (d==='all') ? true
+                  : (d==='gastro' ? (m._type==='michelin'||m._type==='cafe'||m._type==='eat') : String(m._day)===d);
+        if(match){ if(!map.hasLayer(m)) m.addTo(map); if(d!=='all') shown.push(m.getLatLng()); }
+        else { if(map.hasLayer(m)) map.removeLayer(m); }
+      });
+      map.invalidateSize();
+      if(d==='all'){ if(cityBounds.length) map.fitBounds(cityBounds,{padding:[50,50],maxZoom:13}); }
+      else if(shown.length) map.fitBounds(shown,{padding:[50,50],maxZoom:14});
+    });
+  });
+  map.on('click',function(){ map.scrollWheelZoom.enable(); });
+</script>
+</body>
+</html>
