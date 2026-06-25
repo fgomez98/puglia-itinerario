@@ -475,7 +475,8 @@
     var m=L.marker([lat,lng],{icon:icon}).addTo(map).bindPopup(html);
     m._day=day; m._type=type; markers.push(m); bounds.push([lat,lng]);
   });
-  map.fitBounds(bounds,{padding:[40,40]});
+  function fitAll(){ map.invalidateSize(); if(bounds.length) map.fitBounds(bounds,{padding:[40,40]}); }
+  fitAll(); setTimeout(fitAll,300); window.addEventListener('load',fitAll);
 
   var btns=document.querySelectorAll('#filters button');
   btns.forEach(function(b){

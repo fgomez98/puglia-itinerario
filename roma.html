@@ -8,7 +8,7 @@
 <style>
   :root{
     --sea:#9a3324; --sea-dark:#6e2114; --sand:#f4ede1; --ink:#2a211e; --muted:#7a6a64; --line:#e6ddcf;
-    --beach:#1390a3; --town:#b5532a; --eat:#8a6d1f; --exp:#5e8a3a;
+    --town:#b5532a; --eat:#8a6d1f; --exp:#5e8a3a; --shop:#b0398f;
     --d1:#e63950; --d2:#f08a24; --d3:#2fa14b; --d4:#3a63d8; --d5:#8a3ec4;
     --shadow:0 8px 26px rgba(80,30,20,.12);
   }
@@ -62,7 +62,7 @@
   .daybody{padding:0 18px 16px}
   .block{border-top:1px dashed var(--line);padding:12px 0 3px}
   .tag{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;padding:3px 9px;border-radius:999px;color:#fff;margin-bottom:6px}
-  .t-town{background:var(--town)}.t-eat{background:var(--eat)}.t-exp{background:var(--exp)}.t-tip{background:#7a5a52}
+  .t-town{background:var(--town)}.t-eat{background:var(--eat)}.t-exp{background:var(--exp)}.t-shop{background:var(--shop)}.t-tip{background:#7a5a52}
   .block p{margin:6px 0}.block ul{margin:6px 0;padding-left:18px}.block li{margin:5px 0}
   a.map{color:var(--sea-dark);text-decoration:none;border-bottom:1px dotted var(--sea);font-weight:600}
   a.map:hover{color:var(--sea)}
@@ -87,15 +87,15 @@
   <h1>Roma — ruta + mapa</h1>
   <p class="sub">Sáb 11 (llegás 19:00) → Mié 15 (vuelo 22:30) · base en Trastevere/Testaccio</p>
   <div class="facts">
-    <span>🚆 Llegada en tren 19:00</span><span>🏛️ Antigua · Vaticano · Centro</span>
-    <span>🍝 Trattorias & Bib Gourmand</span><span>✈️ Vuelo a Buenos Aires 22:30</span>
+    <span>🚆 Llegada en tren 19:00</span><span>🏛️ Antigua · Centro · Vaticano exprés</span>
+    <span>🌳 Villa Borghese & Gianicolo</span><span>🛍️ Tarde de shopping</span><span>✈️ Vuelo 22:30</span>
   </div>
 </header>
 
 <div class="wrap">
 
   <h3 class="sec" id="mapa">🗺️ Mapa de toda la ruta</h3>
-  <p class="lead">Cada color = un día. Tocá un pin para ver qué es y abrir Google Maps. Filtrá por día o tocá <b>🍴 Gastro</b> para ver solo Michelin ⭐, trattorias 🍝 y cafés/gelato ☕.</p>
+  <p class="lead">Cada color = un día. Tocá un pin para ver qué es y abrir Google Maps. Filtrá por día, 🛍️ aparece en el día de shopping, y <b>🍴 Gastro</b> muestra solo comidas, Michelin ⭐ y cafés ☕.</p>
   <div class="mapwrap">
     <div class="filters" id="filters">
       <button data-day="all" class="active">Todo</button>
@@ -107,7 +107,8 @@
     <div class="legend">
       <span class="k"><b>Tipo:</b></span>
       <span class="k">🏛️ atracción</span>
-      <span class="k">🥾 mirador / paseo</span>
+      <span class="k">🌳 mirador / parque</span>
+      <span class="k">🛍️ shopping</span>
       <span class="k">🍝 comida</span>
       <span class="k">⭐ Michelin</span>
       <span class="k">☕ café/gelato</span>
@@ -116,14 +117,14 @@
   </div>
 
   <h3 class="sec" id="ruta">🧭 La ruta, día por día</h3>
-  <p class="lead">Ordenada para no zigzaguear y aprovechar bien cada zona: día de Roma Antigua, día del Vaticano (lunes, que los museos abren), día del centro histórico, y una última mañana relajada antes del vuelo. Como el domingo el Vaticano cierra, va en lunes.</p>
+  <p class="lead">Sigue de cerca el recorrido clásico de 4 días, ajustado a lo de ustedes: Roma Antigua, centro histórico + tarde de shopping, y un día que combina Vaticano exprés + Castel Sant'Angelo con lo que más les gusta, Villa Borghese. El Gianicolo va de atardecer el primer día completo.</p>
 
   <div class="toc">
     <a href="#d1">D1</a><a href="#d2">D2</a><a href="#d3">D3</a><a href="#d4">D4</a><a href="#d5">D5</a>
     <a href="#gastro">🍴 Gastro</a><a href="#tips">💡 Tips</a>
   </div>
 
-  <div class="note"><b>Cómo leer cada día:</b> 🥾 plan / paseo · 🏛️ qué ver · 🍝 dónde comer · 💡 tip.
+  <div class="note"><b>Cómo leer cada día:</b> 🥾 plan · 🏛️ qué ver · 🛍️ shopping · 🍝 dónde comer · 💡 tip.
   Precios por persona orientativos: <span class="price">€ &lt;20</span> <span class="price mid">€€ 20-40</span> <span class="price hi">€€€ 40+</span>. <span class="bib">Bib Gourmand</span> = Michelin buena relación precio-calidad · <span class="star">★</span> = estrella.</div>
 
   <!-- D1 -->
@@ -135,19 +136,19 @@
     </summary>
     <div class="daybody">
       <div class="block"><span class="tag t-exp">🥾 Llegada</span>
-        <p>El tren llega a <a class="map" href="https://www.google.com/maps/search/?api=1&query=Roma+Termini">Roma Termini</a> a las 19:00. Del Termini a tu zona (Airbnb en <b>Trastevere/Testaccio</b>, CP 00153) en taxi (~15 €) o bus. Dejás las valijas y salís a la calle.</p>
+        <p>El tren llega a <a class="map" href="https://www.google.com/maps/search/?api=1&query=Roma+Termini">Roma Termini</a> a las 19:00. Del Termini a tu zona (Airbnb en <b>Trastevere/Testaccio</b>, CP 00153) en taxi (~15 €) o bus. Dejás las valijas y salís.</p>
       </div>
       <div class="block"><span class="tag t-town">🏛️ Noche</span>
-        <p>Estrenás Roma con lo mejor: el <a class="map" href="https://www.google.com/maps/search/?api=1&query=Piazza+Santa+Maria+in+Trastevere">Trastevere</a>, sus callejones empedrados (Vicolo del Cinque, Via del Moro) y la Piazza Santa Maria in Trastevere iluminada. Aperitivo (Aperol Spritz) y cena tranqui.</p>
+        <p>Estrenás Roma en el <a class="map" href="https://www.google.com/maps/search/?api=1&query=Piazza+Santa+Maria+in+Trastevere">Trastevere</a>: callejones empedrados (Vicolo del Cinque, Via del Moro), la Piazza Santa Maria iluminada, aperitivo (Aperol Spritz) y cena tranqui.</p>
       </div>
       <div class="block"><span class="tag t-eat">🍝 Comer</span>
         <ul>
-          <li><a class="map" href="https://www.google.com/maps/search/?api=1&query=Da+Enzo+al+29+Roma">Da Enzo al 29</a> — carbonara y tiramisú de culto (suele haber cola, vale la pena). <span class="price mid">€€</span></li>
-          <li><a class="map" href="https://www.google.com/maps/search/?api=1&query=Tonnarello+Roma">Tonnarello</a> — cacio e pepe en tonnarelli, abundante y rico. <span class="price">€</span></li>
-          <li><a class="map" href="https://www.google.com/maps/search/?api=1&query=Dar+Poeta+Roma">Dar Poeta</a> — pizza al horno, clásico de Trastevere. <span class="price">€</span></li>
+          <li><a class="map" href="https://www.google.com/maps/search/?api=1&query=Da+Enzo+al+29+Roma">Da Enzo al 29</a> — carbonara y tiramisú de culto (suele haber cola). <span class="price mid">€€</span></li>
+          <li><a class="map" href="https://www.google.com/maps/search/?api=1&query=Tonnarello+Roma">Tonnarello</a> — cacio e pepe abundante. <span class="price">€</span></li>
+          <li><a class="map" href="https://www.google.com/maps/search/?api=1&query=Dar+Poeta+Roma">Dar Poeta</a> — pizza, clásico de Trastevere. <span class="price">€</span></li>
         </ul>
       </div>
-      <div class="block"><span class="tag t-tip">💡 Tip</span><p>Cuidado con carteristas en Termini y el bus. En las trattorias suele haber <i>coperto</i> (cubierto, ~2 €): normal, mirá la carta antes de sentarte cerca de zonas turísticas.</p></div>
+      <div class="block"><span class="tag t-tip">💡 Tip</span><p>Cuidado con carteristas en Termini y el bus. En las trattorias suele haber <i>coperto</i> (~2 €): normal. Mirá la carta antes de sentarte en zonas muy turísticas.</p></div>
     </div>
   </details>
 
@@ -155,26 +156,26 @@
   <details class="day" id="d2">
     <summary>
       <div class="daynum" style="background:var(--d2)"><small>DOM 12</small><b>D2</b></div>
-      <div class="dayhead"><h2>Roma Antigua <span class="badge">arqueológico</span></h2><p class="route">Coliseo · Foro · Palatino · Campidoglio · atardecer en el Aventino</p></div>
+      <div class="dayhead"><h2>Roma Antigua + Gianicolo <span class="badge">arqueológico</span></h2><p class="route">Coliseo · Foro · Palatino · Aventino · atardecer en el Gianicolo</p></div>
       <div class="chev">▼</div>
     </summary>
     <div class="daybody">
       <div class="block"><span class="tag t-town">🏛️ Mañana</span>
-        <p>Arrancá temprano en el <a class="map" href="https://www.google.com/maps/search/?api=1&query=Colosseo+Roma">Coliseo</a> (entrada reservada online, llegá a la apertura). Al lado, el <a class="map" href="https://www.google.com/maps/search/?api=1&query=Arco+di+Costantino">Arco de Constantino</a>, y la entrada combinada al <a class="map" href="https://www.google.com/maps/search/?api=1&query=Palatino+Roma">Palatino</a> y el <a class="map" href="https://www.google.com/maps/search/?api=1&query=Foro+Romano">Foro Romano</a> (bajás del Palatino directo al Foro).</p>
+        <p>Temprano al <a class="map" href="https://www.google.com/maps/search/?api=1&query=Colosseo+Roma">Coliseo</a> (entrada reservada online). Al lado, el <a class="map" href="https://www.google.com/maps/search/?api=1&query=Arco+di+Costantino">Arco de Constantino</a>, y la entrada combinada al <a class="map" href="https://www.google.com/maps/search/?api=1&query=Palatino+Roma">Palatino</a> y el <a class="map" href="https://www.google.com/maps/search/?api=1&query=Foro+Romano">Foro Romano</a>.</p>
       </div>
-      <div class="block"><span class="tag t-town">🏛️ Tarde</span>
-        <p><a class="map" href="https://www.google.com/maps/search/?api=1&query=Piazza+del+Campidoglio">Piazza del Campidoglio</a> (de Miguel Ángel) con su mirador trasero al Foro y los <a class="map" href="https://www.google.com/maps/search/?api=1&query=Musei+Capitolini">Museos Capitolinos</a>; el <a class="map" href="https://www.google.com/maps/search/?api=1&query=Altare+della+Patria+Vittoriano">Vittoriano</a> (subí en ascensor al mirador) y, bajando, la <a class="map" href="https://www.google.com/maps/search/?api=1&query=Bocca+della+Verita">Bocca della Verità</a> y el <a class="map" href="https://www.google.com/maps/search/?api=1&query=Circo+Massimo">Circo Massimo</a>.</p>
+      <div class="block"><span class="tag t-town">🏛️ Mediodía-tarde</span>
+        <p>Bajando: el <a class="map" href="https://www.google.com/maps/search/?api=1&query=Circo+Massimo">Circo Massimo</a>, la <a class="map" href="https://www.google.com/maps/search/?api=1&query=Bocca+della+Verita">Bocca della Verità</a> (Santa Maria in Cosmedin) y el Forum Boarium. Subís al <a class="map" href="https://www.google.com/maps/search/?api=1&query=Giardino+degli+Aranci+Roma">Giardino degli Aranci</a> (Aventino) y el famoso <a class="map" href="https://www.google.com/maps/search/?api=1&query=Buco+della+Serratura+Aventino">ojo de la cerradura</a> de los Caballeros de Malta.</p>
       </div>
-      <div class="block"><span class="tag t-exp">🥾 Atardecer</span>
-        <p>El <a class="map" href="https://www.google.com/maps/search/?api=1&query=Giardino+degli+Aranci+Roma">Giardino degli Aranci</a> en el Aventino: vista a la cúpula de San Pedro y, al lado, el famoso <a class="map" href="https://www.google.com/maps/search/?api=1&query=Buco+della+Serratura+Aventino">ojo de la cerradura</a> de los Caballeros de Malta.</p>
+      <div class="block"><span class="tag t-exp">🌳 Atardecer</span>
+        <p>Cruzás al Trastevere y subís al <a class="map" href="https://www.google.com/maps/search/?api=1&query=Gianicolo+Piazzale+Garibaldi">Parco del Gianicolo</a> (Piazzale Garibaldi y la Fontana dell'Acqua Paola): el mejor panorama de Roma al atardecer. Bajás a cenar al Trastevere.</p>
       </div>
       <div class="block"><span class="tag t-eat">🍝 Comer</span>
         <ul>
-          <li>Evitá las trampas turísticas pegadas al Coliseo: subí al barrio <a class="map" href="https://www.google.com/maps/search/?api=1&query=Monti+Roma">Monti</a> → <a class="map" href="https://www.google.com/maps/search/?api=1&query=Ai+Tre+Scalini+Roma">Ai Tre Scalini</a> (vinería con platos romanos). <span class="price mid">€€</span></li>
-          <li>Gelato: <a class="map" href="https://www.google.com/maps/search/?api=1&query=Fatamorgana+Monti+Roma">Fatamorgana</a> (Monti), artesanal y natural. <span class="price">€</span></li>
+          <li>Almuerzo cerca del Aventino/Testaccio o vuelta al Trastevere. Gelato: <a class="map" href="https://www.google.com/maps/search/?api=1&query=Otaleg+Trastevere">Otaleg</a>. <span class="price">€</span></li>
+          <li>Cena: <a class="map" href="https://www.google.com/maps/search/?api=1&query=Cesare+al+Casaletto+Roma">Cesare al Casaletto</a> (Monteverde, al lado de Trastevere). <span class="bib">Bib Gourmand</span> <span class="price mid">€€</span></li>
         </ul>
       </div>
-      <div class="block"><span class="tag t-tip">💡 Tip</span><p>El Vaticano cierra los domingos, por eso hoy va Roma Antigua. Reservá el Coliseo con varios días de anticipación; la entrada incluye Foro + Palatino (válida 24h).</p></div>
+      <div class="block"><span class="tag t-tip">💡 Tip</span><p>Reservá el Coliseo con varios días de anticipación; la entrada incluye Foro + Palatino. Al Gianicolo se sube caminando desde el Trastevere (cuesta empinada) o en el bus 115.</p></div>
     </div>
   </details>
 
@@ -182,23 +183,27 @@
   <details class="day" id="d3">
     <summary>
       <div class="daynum" style="background:var(--d3)"><small>LUN 13</small><b>D3</b></div>
-      <div class="dayhead"><h2>Vaticano <span class="badge">arte</span></h2><p class="route">Museos + Sixtina · San Pedro · cúpula · Castel Sant'Angelo</p></div>
+      <div class="dayhead"><h2>Centro histórico + shopping <span class="badge">🛍️ tarde</span></h2><p class="route">Pantheon · Trevi · Navona · Ghetto · tarde de compras en Via del Corso</p></div>
       <div class="chev">▼</div>
     </summary>
     <div class="daybody">
       <div class="block"><span class="tag t-town">🏛️ Mañana</span>
-        <p><a class="map" href="https://www.google.com/maps/search/?api=1&query=Musei+Vaticani">Museos Vaticanos</a> (reservá sin colas, llegá a la apertura): Estancias de Rafael, Galería de Mapas y la <a class="map" href="https://www.google.com/maps/search/?api=1&query=Cappella+Sistina">Capilla Sixtina</a>. Después la <a class="map" href="https://www.google.com/maps/search/?api=1&query=Basilica+di+San+Pietro">Basílica de San Pedro</a> (gratis) y subí a la <a class="map" href="https://www.google.com/maps/search/?api=1&query=Cupola+San+Pietro">cúpula</a> para la mejor vista de Roma.</p>
+        <p>Arrancá por el <a class="map" href="https://www.google.com/maps/search/?api=1&query=Pantheon+Roma">Pantheon</a> (temprano), la <a class="map" href="https://www.google.com/maps/search/?api=1&query=Fontana+di+Trevi">Fontana di Trevi</a>, el <a class="map" href="https://www.google.com/maps/search/?api=1&query=Mercati+di+Traiano">Mercado de Trajano</a> y el <a class="map" href="https://www.google.com/maps/search/?api=1&query=Altare+della+Patria+Vittoriano">Vittoriano</a> (mirador en ascensor) con los <a class="map" href="https://www.google.com/maps/search/?api=1&query=Musei+Capitolini">Museos Capitolinos</a>.</p>
       </div>
-      <div class="block"><span class="tag t-town">🏛️ Tarde</span>
-        <p><a class="map" href="https://www.google.com/maps/search/?api=1&query=Castel+Sant+Angelo">Castel Sant'Angelo</a> (subís en rampa en espiral hasta la terraza), el <a class="map" href="https://www.google.com/maps/search/?api=1&query=Ponte+Sant+Angelo">Ponte Sant'Angelo</a> con sus ángeles y, para la postal de la cúpula, el <a class="map" href="https://www.google.com/maps/search/?api=1&query=Ponte+Umberto+I+Roma">Ponte Umberto I</a>.</p>
+      <div class="block"><span class="tag t-town">🏛️ Mediodía</span>
+        <p><a class="map" href="https://www.google.com/maps/search/?api=1&query=Largo+di+Torre+Argentina">Largo di Torre Argentina</a> (gatos + donde mataron a César), el <a class="map" href="https://www.google.com/maps/search/?api=1&query=Portico+di+Ottavia+Ghetto+Roma">Barrio Judío</a> (probá los <i>carciofi alla giudia</i>), <a class="map" href="https://www.google.com/maps/search/?api=1&query=Campo+de+Fiori">Campo de' Fiori</a> y <a class="map" href="https://www.google.com/maps/search/?api=1&query=Piazza+Navona">Piazza Navona</a>.</p>
+      </div>
+      <div class="block"><span class="tag t-shop">🛍️ Tarde de shopping</span>
+        <p>La gran tarde de compras: la <a class="map" href="https://www.google.com/maps/search/?api=1&query=Via+del+Corso+Roma">Via del Corso</a> (la calle comercial principal, marcas para todos los bolsillos) y la <a class="map" href="https://www.google.com/maps/search/?api=1&query=Galleria+Alberto+Sordi+Roma">Galleria Alberto Sordi</a>. Terminás en la <a class="map" href="https://www.google.com/maps/search/?api=1&query=Piazza+di+Spagna">Piazza di Spagna</a> y la <a class="map" href="https://www.google.com/maps/search/?api=1&query=Via+dei+Condotti+Roma">Via dei Condotti</a> (lujo y vidrieras) al atardecer.</p>
       </div>
       <div class="block"><span class="tag t-eat">🍝 Comer</span>
         <ul>
-          <li><a class="map" href="https://www.google.com/maps/search/?api=1&query=Pizzarium+Bonci+Roma">Pizzarium (Bonci)</a> — la mejor pizza al taglio de Roma, a pasos de los museos. <span class="price">€</span></li>
-          <li><a class="map" href="https://www.google.com/maps/search/?api=1&query=200+Gradi+Roma">200 Gradi</a> — panini gourmet cerca del Vaticano. <span class="price">€</span></li>
+          <li><a class="map" href="https://www.google.com/maps/search/?api=1&query=Armando+al+Pantheon">Armando al Pantheon</a> — cocina romana clásica (reservar). <span class="price mid">€€</span></li>
+          <li><a class="map" href="https://www.google.com/maps/search/?api=1&query=Roscioli+Roma">Roscioli</a> — salumeria-restaurante, carbonara famosa. <span class="price mid">€€</span></li>
+          <li>Café: <a class="map" href="https://www.google.com/maps/search/?api=1&query=Sant+Eustachio+Il+Caffe+Roma">Sant'Eustachio</a> · Gelato: <a class="map" href="https://www.google.com/maps/search/?api=1&query=Giolitti+Roma">Giolitti</a> · Tiramisú: <a class="map" href="https://www.google.com/maps/search/?api=1&query=Two+Sizes+Roma">Two Sizes</a>. <span class="price">€</span></li>
         </ul>
       </div>
-      <div class="block"><span class="tag t-tip">💡 Tip</span><p>Hombros y rodillas cubiertos para entrar a los museos y a San Pedro. Los museos abren lunes (cierran domingos), por eso el Vaticano va hoy. Llevá agua: la rellenás en los <i>nasoni</i> (fuentes públicas).</p></div>
+      <div class="block"><span class="tag t-tip">💡 Tip</span><p>Bajar al nivel inferior de la Fontana di Trevi cuesta 2 €. Las tiendas en Italia suelen cerrar 19:30-20:00; arrancá el shopping a media tarde con tiempo.</p></div>
     </div>
   </details>
 
@@ -206,27 +211,26 @@
   <details class="day" id="d4">
     <summary>
       <div class="daynum" style="background:var(--d4)"><small>MAR 14</small><b>D4</b></div>
-      <div class="dayhead"><h2>Centro histórico <span class="badge">postales</span></h2><p class="route">Pantheon · Trevi · Navona · Campo de' Fiori · Ghetto · Pincio</p></div>
+      <div class="dayhead"><h2>Vaticano exprés + Villa Borghese <span class="badge">🌳 tu favorito</span></h2><p class="route">San Pedro · Castel Sant'Angelo · Piazza del Popolo · Villa Borghese · Pincio</p></div>
       <div class="chev">▼</div>
     </summary>
     <div class="daybody">
-      <div class="block"><span class="tag t-town">🏛️ Mañana</span>
-        <p>Empezá temprano por el <a class="map" href="https://www.google.com/maps/search/?api=1&query=Pantheon+Roma">Pantheon</a> (impresionante y gratis), seguí a la <a class="map" href="https://www.google.com/maps/search/?api=1&query=Fontana+di+Trevi">Fontana di Trevi</a> (tirá la moneda) y a la <a class="map" href="https://www.google.com/maps/search/?api=1&query=Piazza+di+Spagna">Piazza di Spagna</a> con su escalinata.</p>
+      <div class="block"><span class="tag t-town">🏛️ Mañana · Vaticano exprés</span>
+        <p>Como el Vaticano no es lo suyo, lo hacen para conocer: la <a class="map" href="https://www.google.com/maps/search/?api=1&query=Piazza+San+Pietro">Plaza de San Pedro</a> y la <a class="map" href="https://www.google.com/maps/search/?api=1&query=Basilica+di+San+Pietro">Basílica</a> (entrada gratis; si quieren, suban a la cúpula). <i>Opcional</i> los Museos + Sixtina solo si les pica la curiosidad. Después, <a class="map" href="https://www.google.com/maps/search/?api=1&query=Castel+Sant+Angelo">Castel Sant'Angelo</a> y su terraza, cruzando el <a class="map" href="https://www.google.com/maps/search/?api=1&query=Ponte+Sant+Angelo">Ponte Sant'Angelo</a>.</p>
       </div>
       <div class="block"><span class="tag t-town">🏛️ Mediodía</span>
-        <p><a class="map" href="https://www.google.com/maps/search/?api=1&query=Piazza+Navona">Piazza Navona</a> (Fuente de los Cuatro Ríos de Bernini), el mercado de <a class="map" href="https://www.google.com/maps/search/?api=1&query=Campo+de+Fiori">Campo de' Fiori</a>, <a class="map" href="https://www.google.com/maps/search/?api=1&query=Largo+di+Torre+Argentina">Largo di Torre Argentina</a> (gatos + donde mataron a César) y el <a class="map" href="https://www.google.com/maps/search/?api=1&query=Portico+di+Ottavia+Ghetto+Roma">Barrio Judío</a> (probá los <i>carciofi alla giudia</i>).</p>
+        <p>Por el Tíber hacia el <a class="map" href="https://www.google.com/maps/search/?api=1&query=Ponte+Umberto+I+Roma">Ponte Umberto I</a> (postal de la cúpula) y la <a class="map" href="https://www.google.com/maps/search/?api=1&query=Piazza+del+Popolo">Piazza del Popolo</a> (iglesias gemelas, Caravaggios en Santa Maria del Popolo).</p>
       </div>
-      <div class="block"><span class="tag t-exp">🥾 Atardecer</span>
-        <p><a class="map" href="https://www.google.com/maps/search/?api=1&query=Villa+Borghese">Villa Borghese</a> y la <a class="map" href="https://www.google.com/maps/search/?api=1&query=Terrazza+del+Pincio">Terraza del Pincio</a> con vista a la Piazza del Popolo al atardecer. (Si quieren la Galería Borghese, reservar sí o sí; abre martes.)</p>
+      <div class="block"><span class="tag t-exp">🌳 Tarde · Villa Borghese</span>
+        <p>Tu parte preferida: <a class="map" href="https://www.google.com/maps/search/?api=1&query=Villa+Borghese">Villa Borghese</a> con calma — alquilar un botecito en el laghetto, recorrer los jardines y, si reservan, la <a class="map" href="https://www.google.com/maps/search/?api=1&query=Galleria+Borghese">Galleria Borghese</a> (Bernini y Caravaggio; entrada con horario, abre martes). Cierre en la <a class="map" href="https://www.google.com/maps/search/?api=1&query=Terrazza+del+Pincio">Terraza del Pincio</a> al atardecer, mirando la Piazza del Popolo.</p>
       </div>
       <div class="block"><span class="tag t-eat">🍝 Comer</span>
         <ul>
-          <li><a class="map" href="https://www.google.com/maps/search/?api=1&query=Armando+al+Pantheon">Armando al Pantheon</a> — cocina romana clásica, histórico (reservar). <span class="price mid">€€</span></li>
-          <li><a class="map" href="https://www.google.com/maps/search/?api=1&query=Roscioli+Roma">Roscioli</a> — salumeria-restaurante, carbonara famosa. <span class="price mid">€€</span></li>
-          <li>Café: <a class="map" href="https://www.google.com/maps/search/?api=1&query=Sant+Eustachio+Il+Caffe+Roma">Sant'Eustachio Il Caffè</a> · Postre: <a class="map" href="https://www.google.com/maps/search/?api=1&query=Two+Sizes+Roma">Two Sizes</a> (tiramisú) o gelato en <a class="map" href="https://www.google.com/maps/search/?api=1&query=Giolitti+Roma">Giolitti</a>. <span class="price">€</span></li>
+          <li>Cerca del Vaticano: <a class="map" href="https://www.google.com/maps/search/?api=1&query=Pizzarium+Bonci+Roma">Pizzarium (Bonci)</a> — la mejor pizza al taglio de Roma. <span class="price">€</span></li>
+          <li><a class="map" href="https://www.google.com/maps/search/?api=1&query=200+Gradi+Roma">200 Gradi</a> — panini gourmet en Prati. <span class="price">€</span></li>
         </ul>
       </div>
-      <div class="block"><span class="tag t-tip">💡 Tip</span><p>Bajar al nivel inferior de la Fontana di Trevi cuesta 2 €. El centro se hace caminando; es la zona más linda para perderse de noche.</p></div>
+      <div class="block"><span class="tag t-tip">💡 Tip</span><p>La Galleria Borghese es con reserva y horario fijo (cupos limitados): si la quieren, sáquenla con anticipación. Para San Pedro: hombros y rodillas cubiertos.</p></div>
     </div>
   </details>
 
@@ -234,23 +238,23 @@
   <details class="day" id="d5">
     <summary>
       <div class="daynum" style="background:var(--d5)"><small>MIÉ 15</small><b>D5</b></div>
-      <div class="dayhead"><h2>Última mañana + vuelo <span class="badge">check-out</span></h2><p class="route">Trastevere & Gianicolo (o Testaccio) · último almuerzo · a Fiumicino</p></div>
+      <div class="dayhead"><h2>Última mañana + vuelo <span class="badge">check-out</span></h2><p class="route">Mañana relajada en Trastevere/Testaccio · último almuerzo · a Fiumicino</p></div>
       <div class="chev">▼</div>
     </summary>
     <div class="daybody">
-      <div class="block"><span class="tag t-exp">🥾 Mañana</span>
-        <p>Dos opciones según la onda: <b>(A)</b> el <a class="map" href="https://www.google.com/maps/search/?api=1&query=Trastevere+Roma">Trastevere</a> de día + subir al <a class="map" href="https://www.google.com/maps/search/?api=1&query=Fontana+dell+Acqua+Paola+Gianicolo">Gianicolo</a> (Fontana dell'Acqua Paola, el mejor panorama de Roma). <b>(B)</b> foodie: el <a class="map" href="https://www.google.com/maps/search/?api=1&query=Mercato+di+Testaccio">Mercato di Testaccio</a> y el barrio de la cocina romana.</p>
+      <div class="block"><span class="tag t-exp">🥾 Mañana relajada</span>
+        <p>Según las ganas: una vuelta tranquila por el <a class="map" href="https://www.google.com/maps/search/?api=1&query=Trastevere+Roma">Trastevere</a> de día, o el lado foodie en el <a class="map" href="https://www.google.com/maps/search/?api=1&query=Mercato+di+Testaccio">Mercato di Testaccio</a>. Si quedó algo pendiente del shopping, la <a class="map" href="https://www.google.com/maps/search/?api=1&query=Via+Cola+di+Rienzo+Roma">Via Cola di Rienzo</a> (Prati) es otra gran calle de compras.</p>
       </div>
       <div class="block"><span class="tag t-eat">🍝 Último almuerzo</span>
         <ul>
-          <li><a class="map" href="https://www.google.com/maps/search/?api=1&query=Felice+a+Testaccio">Felice a Testaccio</a> — la <i>cacio e pepe</i> mítica, mezclada en tu mesa (reservar). <span class="price mid">€€</span></li>
-          <li><a class="map" href="https://www.google.com/maps/search/?api=1&query=Mordi+e+Vai+Mercato+Testaccio">Mordi e Vai</a> — panini de cocina romana en el mercado, baratísimo. <span class="price">€</span></li>
+          <li><a class="map" href="https://www.google.com/maps/search/?api=1&query=Felice+a+Testaccio">Felice a Testaccio</a> — la <i>cacio e pepe</i> mítica (reservar). <span class="price mid">€€</span></li>
+          <li><a class="map" href="https://www.google.com/maps/search/?api=1&query=Mordi+e+Vai+Mercato+Testaccio">Mordi e Vai</a> — panini romanos en el mercado, baratísimo. <span class="price">€</span></li>
         </ul>
       </div>
       <div class="block"><span class="tag t-exp">🥾 Cierre · al aeropuerto</span>
-        <p>A media tarde (~18:00) salís hacia <a class="map" href="https://www.google.com/maps/search/?api=1&query=Aeroporto+di+Roma+Fiumicino">Fiumicino (FCO)</a> para el vuelo de las 22:30 a Buenos Aires. Desde Termini, el <b>Leonardo Express</b> (32 min, ~14 €) o taxi a tarifa fija (~50 €).</p>
+        <p>A media tarde (~18:00) salís hacia <a class="map" href="https://www.google.com/maps/search/?api=1&query=Aeroporto+di+Roma+Fiumicino">Fiumicino (FCO)</a> para el vuelo de 22:30 a Buenos Aires. Desde Termini, el <b>Leonardo Express</b> (32 min, ~14 €) o taxi a tarifa fija (~50 €).</p>
       </div>
-      <div class="block"><span class="tag t-tip">💡 Tip</span><p>Para un vuelo intercontinental, estate en FCO unas 3 h antes (≈19:30). Dejá margen para el check-out del Airbnb y el traslado.</p></div>
+      <div class="block"><span class="tag t-tip">💡 Tip</span><p>Para un vuelo intercontinental, estate en FCO ~3 h antes (≈19:30). Dejá margen para el check-out y el traslado.</p></div>
     </div>
   </details>
 
@@ -263,28 +267,28 @@
       <p><span class="pill">Carbonara</span><span class="pill">Cacio e pepe</span><span class="pill">Amatriciana</span><span class="pill">Gricia</span><span class="pill">Supplì</span><span class="pill">Trapizzino</span><span class="pill">Maritozzo</span><span class="pill">Carciofi alla giudia/romana</span><span class="pill">Saltimbocca</span><span class="pill">Coda alla vaccinara</span><span class="pill">Pizza al taglio</span><span class="pill">Gelato</span></p>
     </div>
 
-    <div class="block"><span class="tag t-eat">🗺️ Trastevere (tu base) · D1, D5</span>
+    <div class="block"><span class="tag t-eat">🗺️ Trastevere (tu base) · D1, D2, D5</span>
       <p><b>Comer:</b> <a class="map" href="https://www.google.com/maps/search/?api=1&query=Da+Enzo+al+29+Roma">Da Enzo al 29</a>, <a class="map" href="https://www.google.com/maps/search/?api=1&query=Tonnarello+Roma">Tonnarello</a>, <a class="map" href="https://www.google.com/maps/search/?api=1&query=Da+Augusto+Trastevere">Da Augusto</a> (casero y barato), <a class="map" href="https://www.google.com/maps/search/?api=1&query=Dar+Poeta+Roma">Dar Poeta</a> (pizza). <span class="price">€</span></p>
-      <p><b>☕ Dulce/gelato:</b> <a class="map" href="https://www.google.com/maps/search/?api=1&query=Otaleg+Trastevere">Otaleg</a> y <a class="map" href="https://www.google.com/maps/search/?api=1&query=Fior+di+Luna+Trastevere">Fior di Luna</a> (gelato artesanal); maritozzo en <a class="map" href="https://www.google.com/maps/search/?api=1&query=Il+Maritozzaro+Roma">Il Maritozzaro</a>.</p>
+      <p><b>☕ Dulce/gelato:</b> <a class="map" href="https://www.google.com/maps/search/?api=1&query=Otaleg+Trastevere">Otaleg</a> y <a class="map" href="https://www.google.com/maps/search/?api=1&query=Fior+di+Luna+Trastevere">Fior di Luna</a>; maritozzo en <a class="map" href="https://www.google.com/maps/search/?api=1&query=Il+Maritozzaro+Roma">Il Maritozzaro</a>.</p>
     </div>
 
     <div class="block"><span class="tag t-eat">🗺️ Testaccio — cuna de la cocina romana · D5</span>
-      <p><b>Típico:</b> el "quinto cuarto" (casquería) y la <i>cacio e pepe</i>. <a class="map" href="https://www.google.com/maps/search/?api=1&query=Felice+a+Testaccio">Felice a Testaccio</a> (desde 1936), <a class="map" href="https://www.google.com/maps/search/?api=1&query=Mordi+e+Vai+Mercato+Testaccio">Mordi e Vai</a> (panini en el mercado) y <a class="map" href="https://www.google.com/maps/search/?api=1&query=Trapizzino+Testaccio">Trapizzino</a> (donde nació). Precios 20-30% más bajos que el centro. <span class="price">€</span></p>
+      <p><b>Típico:</b> el "quinto cuarto" y la <i>cacio e pepe</i>. <a class="map" href="https://www.google.com/maps/search/?api=1&query=Felice+a+Testaccio">Felice a Testaccio</a> (desde 1936), <a class="map" href="https://www.google.com/maps/search/?api=1&query=Mordi+e+Vai+Mercato+Testaccio">Mordi e Vai</a> (panini en el mercado) y <a class="map" href="https://www.google.com/maps/search/?api=1&query=Trapizzino+Testaccio">Trapizzino</a> (donde nació). Precios 20-30% más bajos que el centro. <span class="price">€</span></p>
     </div>
 
-    <div class="block"><span class="tag t-eat">🗺️ Centro / Pantheon · D4</span>
+    <div class="block"><span class="tag t-eat">🗺️ Centro / Pantheon · D3</span>
       <p><b>Comer:</b> <a class="map" href="https://www.google.com/maps/search/?api=1&query=Armando+al+Pantheon">Armando al Pantheon</a>, <a class="map" href="https://www.google.com/maps/search/?api=1&query=Roscioli+Roma">Roscioli</a>, <a class="map" href="https://www.google.com/maps/search/?api=1&query=Forno+Campo+de+Fiori">Forno Campo de' Fiori</a> (pizza bianca). <span class="price mid">€€</span></p>
-      <p><b>☕ Cafés:</b> <a class="map" href="https://www.google.com/maps/search/?api=1&query=Sant+Eustachio+Il+Caffe+Roma">Sant'Eustachio</a> y <a class="map" href="https://www.google.com/maps/search/?api=1&query=Tazza+d+Oro+Roma">Tazza d'Oro</a> (de los mejores espresso de Italia); gelato en <a class="map" href="https://www.google.com/maps/search/?api=1&query=Giolitti+Roma">Giolitti</a>, tiramisú en <a class="map" href="https://www.google.com/maps/search/?api=1&query=Two+Sizes+Roma">Two Sizes</a>.</p>
+      <p><b>☕ Cafés:</b> <a class="map" href="https://www.google.com/maps/search/?api=1&query=Sant+Eustachio+Il+Caffe+Roma">Sant'Eustachio</a> y <a class="map" href="https://www.google.com/maps/search/?api=1&query=Tazza+d+Oro+Roma">Tazza d'Oro</a> (de los mejores espresso de Italia); gelato en <a class="map" href="https://www.google.com/maps/search/?api=1&query=Giolitti+Roma">Giolitti</a>.</p>
     </div>
 
-    <div class="block"><span class="tag t-eat">🗺️ Vaticano / Prati · D3</span>
+    <div class="block"><span class="tag t-eat">🗺️ Vaticano / Prati · D4</span>
       <p><b>Comer:</b> <a class="map" href="https://www.google.com/maps/search/?api=1&query=Pizzarium+Bonci+Roma">Pizzarium (Bonci)</a> — pizza al taglio de referencia mundial — y <a class="map" href="https://www.google.com/maps/search/?api=1&query=200+Gradi+Roma">200 Gradi</a> (panini). <span class="price">€</span></p>
     </div>
 
     <div class="block"><span class="tag t-eat">⭐ Michelin accesible (vale el viajecito)</span>
       <p>Bib Gourmand de cocina romana moderna, ideales para una cena especial sin romper el presupuesto:</p>
       <ul>
-        <li><a class="map" href="https://www.google.com/maps/search/?api=1&query=SantoPalato+Roma">SantoPalato</a> (Sarah Cicolini, zona San Giovanni). <span class="bib">Bib Gourmand</span> <span class="price mid">€€</span></li>
+        <li><a class="map" href="https://www.google.com/maps/search/?api=1&query=SantoPalato+Roma">SantoPalato</a> (Sarah Cicolini, San Giovanni). <span class="bib">Bib Gourmand</span> <span class="price mid">€€</span></li>
         <li><a class="map" href="https://www.google.com/maps/search/?api=1&query=Trattoria+Pennestri+Roma">Trattoria Pennestri</a> (Ostiense). <span class="bib">Bib Gourmand</span> <span class="price mid">€€</span></li>
         <li><a class="map" href="https://www.google.com/maps/search/?api=1&query=Trecca+Roma">Trecca</a> (San Giovanni) y <a class="map" href="https://www.google.com/maps/search/?api=1&query=Cesare+al+Casaletto+Roma">Cesare al Casaletto</a> (Monteverde, al lado de Trastevere). <span class="bib">Bib Gourmand</span> <span class="price mid">€€</span></li>
       </ul>
@@ -294,9 +298,9 @@
 
   <h3 class="sec" id="tips">💡 Saber antes de ir</h3>
   <div class="ref">
-    <div class="block" style="border-top:none"><span class="tag t-tip">Entradas</span><p>Reservá con anticipación <b>Coliseo</b> (incluye Foro + Palatino) y <b>Museos Vaticanos</b>: en verano las colas son largas. San Pedro y el Pantheon son gratis (llegá temprano).</p></div>
-    <div class="block"><span class="tag t-tip">Días y horarios</span><p>El Vaticano <b>cierra domingos</b> (por eso va el lunes). La Galería Borghese requiere reserva. Miércoles a la mañana hay audiencia papal en la plaza de San Pedro.</p></div>
-    <div class="block"><span class="tag t-tip">Moverse</span><p>El centro se camina; para distancias, bus/metro (billete 1,5 €, validar al subir). Ojo carteristas en transporte y zonas turísticas. Rellená agua en los <i>nasoni</i>.</p></div>
+    <div class="block" style="border-top:none"><span class="tag t-tip">Entradas</span><p>Reservá con anticipación el <b>Coliseo</b> (incluye Foro + Palatino) y, si la quieren, la <b>Galleria Borghese</b> (horario fijo, cupos). San Pedro y el Pantheon son gratis; llegá temprano.</p></div>
+    <div class="block"><span class="tag t-tip">Shopping</span><p>Via del Corso (mainstream), Galleria Alberto Sordi (galería cubierta), Via dei Condotti/Via del Babuino (lujo, junto a Piazza di Spagna) y Via Cola di Rienzo (Prati). Tiendas suelen cerrar ~19:30-20:00.</p></div>
+    <div class="block"><span class="tag t-tip">Moverse</span><p>El centro se camina; para distancias, bus/metro (billete 1,5 €, validar al subir). Ojo carteristas. Rellená agua en los <i>nasoni</i> (fuentes públicas).</p></div>
     <div class="block"><span class="tag t-tip">Vuelo del día 15</span><p>Al FCO con el <b>Leonardo Express</b> (Termini→FCO, 32 min) o taxi a tarifa fija (~50 €). Para el vuelo de 22:30, estar en el aeropuerto ~19:30.</p></div>
   </div>
 
@@ -309,7 +313,7 @@
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
   var dayColors = {1:'#e63950',2:'#f08a24',3:'#2fa14b',4:'#3a63d8',5:'#8a3ec4'};
-  var typeIcon = {town:'🏛️', exp:'🥾', eat:'🍝', michelin:'⭐', cafe:'☕', hotel:'🏨'};
+  var typeIcon = {town:'🏛️', exp:'🌳', shop:'🛍️', eat:'🍝', michelin:'⭐', cafe:'☕', hotel:'🏨'};
   // [name, lat, lng, day, type, desc]
   var places = [
     ["Roma Termini (llegada en tren)",41.9010,12.5015,1,"exp","Llegada 19:00"],
@@ -319,48 +323,54 @@
     ["Colosseo",41.8902,12.4922,2,"town","Reservar online, llegar a la apertura"],
     ["Foro Romano",41.8925,12.4853,2,"town","Incluido con el Coliseo"],
     ["Palatino",41.8892,12.4876,2,"town","Bajás directo al Foro"],
-    ["Piazza del Campidoglio",41.8932,12.4828,2,"town","Miguel Ángel + mirador al Foro"],
-    ["Vittoriano (Altare della Patria)",41.8959,12.4828,2,"town","Mirador en ascensor"],
+    ["Arco di Costantino",41.8898,12.4906,2,"town","Junto al Coliseo"],
+    ["Circo Massimo",41.8859,12.4880,2,"town","Antiguo circo de carreras"],
     ["Bocca della Verità",41.8881,12.4815,2,"town","En Santa Maria in Cosmedin"],
-    ["Giardino degli Aranci (Aventino)",41.8843,12.4796,2,"exp","Atardecer con vista a San Pedro"],
-    ["Ai Tre Scalini (Monti)",41.8957,12.4915,2,"eat","Vinería con platos romanos €€"],
-    ["Fatamorgana (Monti)",41.8949,12.4905,2,"cafe","Gelato artesanal"],
-    ["Musei Vaticani + Sixtina",41.9065,12.4536,3,"town","Reservar sin colas"],
-    ["Basilica di San Pietro",41.9022,12.4539,3,"town","Gratis + subir a la cúpula"],
-    ["Castel Sant'Angelo",41.9031,12.4663,3,"town","Rampa en espiral a la terraza"],
-    ["Ponte Umberto I",41.9015,12.4707,3,"exp","Postal de la cúpula de San Pedro"],
-    ["Pizzarium (Bonci)",41.9072,12.4470,3,"eat","La mejor pizza al taglio €"],
-    ["200 Gradi (Prati)",41.9070,12.4565,3,"eat","Panini gourmet €"],
-    ["Pantheon",41.8986,12.4769,4,"town","Gratis, ir temprano"],
-    ["Fontana di Trevi",41.9009,12.4833,4,"town","Tirá la moneda"],
-    ["Piazza di Spagna",41.9058,12.4823,4,"town","La escalinata"],
-    ["Piazza Navona",41.8992,12.4731,4,"town","Fuente de los Cuatro Ríos (Bernini)"],
-    ["Campo de' Fiori",41.8955,12.4723,4,"town","Mercado a la mañana"],
-    ["Largo di Torre Argentina",41.8957,12.4768,4,"town","Gatos + donde mataron a César"],
-    ["Barrio Judío (Portico d'Ottavia)",41.8923,12.4779,4,"town","Carciofi alla giudia"],
+    ["Giardino degli Aranci + cerradura (Aventino)",41.8843,12.4796,2,"exp","Vista a San Pedro + ojo de la cerradura"],
+    ["Parco del Gianicolo",41.8910,12.4625,2,"exp","Atardecer: el mejor panorama de Roma"],
+    ["Cesare al Casaletto (Monteverde)",41.8788,12.4430,2,"michelin","Bib Gourmand · al lado de Trastevere"],
+    ["Otaleg (Trastevere)",41.8866,12.4690,2,"cafe","Gelato artesanal"],
+    ["Pantheon",41.8986,12.4769,3,"town","Gratis, ir temprano"],
+    ["Fontana di Trevi",41.9009,12.4833,3,"town","Tirá la moneda"],
+    ["Mercati di Traiano",41.8957,12.4870,3,"town","Primer 'centro comercial' de la historia"],
+    ["Vittoriano (Altare della Patria)",41.8959,12.4828,3,"town","Mirador en ascensor + Capitolinos"],
+    ["Largo di Torre Argentina",41.8957,12.4768,3,"town","Gatos + donde mataron a César"],
+    ["Barrio Judío (Portico d'Ottavia)",41.8923,12.4779,3,"town","Carciofi alla giudia"],
+    ["Campo de' Fiori",41.8955,12.4723,3,"town","Mercado a la mañana"],
+    ["Piazza Navona",41.8992,12.4731,3,"town","Fuente de los Cuatro Ríos (Bernini)"],
+    ["Via del Corso (shopping)",41.9010,12.4790,3,"shop","Calle comercial principal"],
+    ["Galleria Alberto Sordi",41.9006,12.4805,3,"shop","Galería comercial cubierta"],
+    ["Piazza di Spagna + Via dei Condotti",41.9057,12.4810,3,"shop","Escalinata + lujo y vidrieras"],
+    ["Armando al Pantheon",41.8990,12.4765,3,"eat","Cocina romana clásica (reservar) €€"],
+    ["Roscioli",41.8943,12.4727,3,"eat","Salumeria-restaurante, carbonara €€"],
+    ["Sant'Eustachio Il Caffè",41.8985,12.4750,3,"cafe","De los mejores espresso de Roma"],
+    ["Giolitti",41.9005,12.4780,3,"cafe","Gelato histórico"],
+    ["Basilica di San Pietro",41.9022,12.4539,4,"town","Vaticano exprés: plaza + basílica (gratis)"],
+    ["Castel Sant'Angelo",41.9031,12.4663,4,"town","Rampa en espiral a la terraza"],
+    ["Ponte Umberto I",41.9015,12.4707,4,"exp","Postal de la cúpula de San Pedro"],
+    ["Piazza del Popolo",41.9107,12.4763,4,"town","Iglesias gemelas + Caravaggios"],
+    ["Villa Borghese",41.9140,12.4900,4,"exp","Tu favorito: parque, laghetto y jardines"],
+    ["Galleria Borghese",41.9142,12.4920,4,"town","Bernini y Caravaggio (reserva con horario)"],
     ["Terrazza del Pincio",41.9105,12.4780,4,"exp","Atardecer sobre Piazza del Popolo"],
-    ["Armando al Pantheon",41.8990,12.4765,4,"eat","Cocina romana clásica (reservar) €€"],
-    ["Roscioli",41.8943,12.4727,4,"eat","Salumeria-restaurante, carbonara €€"],
-    ["Sant'Eustachio Il Caffè",41.8985,12.4750,4,"cafe","De los mejores espresso de Roma"],
-    ["Giolitti",41.9005,12.4780,4,"cafe","Gelato histórico"],
-    ["Gianicolo (Fontana Acqua Paola)",41.8889,12.4622,5,"exp","El mejor panorama de Roma"],
+    ["Pizzarium (Bonci)",41.9072,12.4470,4,"eat","La mejor pizza al taglio €"],
+    ["200 Gradi (Prati)",41.9070,12.4565,4,"eat","Panini gourmet €"],
     ["Mercato di Testaccio",41.8772,12.4750,5,"eat","Mercado foodie de la cocina romana"],
     ["Felice a Testaccio",41.8800,12.4755,5,"eat","Cacio e pepe mítica (reservar) €€"],
     ["Mordi e Vai (Testaccio)",41.8772,12.4748,5,"eat","Panini romanos en el mercado €"],
-    ["Aeropuerto Fiumicino (FCO)",41.8003,12.2389,5,"exp","Vuelo 22:30 a Buenos Aires"],
+    ["Via Cola di Rienzo (shopping)",41.9075,12.4640,5,"shop","Otra gran calle de compras (Prati)"],
     ["SantoPalato (San Giovanni)",41.8840,12.5090,5,"michelin","Bib Gourmand · Sarah Cicolini"],
     ["Trattoria Pennestri (Ostiense)",41.8720,12.4790,5,"michelin","Bib Gourmand"],
     ["Trecca (San Giovanni)",41.8835,12.5125,5,"michelin","Bib Gourmand · romana moderna"],
-    ["Cesare al Casaletto (Monteverde)",41.8788,12.4430,5,"michelin","Bib Gourmand · al lado de Trastevere"]
+    ["Aeropuerto Fiumicino (FCO)",41.8003,12.2389,5,"exp","Vuelo 22:30 a Buenos Aires"]
   ];
 
-  var map = L.map('map',{scrollWheelZoom:false}).setView([41.895,12.48],13);
+  var map = L.map('map',{scrollWheelZoom:false}).setView([41.900,12.478],13);
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
     maxZoom:19, attribution:'© OpenStreetMap'
   }).addTo(map);
 
   var markers = [];
-  var bounds = [];
+  var cityBounds = [];
   places.forEach(function(p){
     var name=p[0], lat=p[1], lng=p[2], day=p[3], type=p[4], desc=p[5];
     var color=dayColors[day];
@@ -372,10 +382,12 @@
     var html='<div class="pop"><span class="pop-day" style="background:'+color+'">DÍA '+day+'</span><br>'+
              '<b>'+name+'</b><br>'+desc+'<br><a href="'+g+'" target="_blank">Abrir en Google Maps ↗</a></div>';
     var m=L.marker([lat,lng],{icon:icon}).addTo(map).bindPopup(html);
-    m._day=day; m._type=type; markers.push(m); bounds.push([lat,lng]);
+    m._day=day; m._type=type; markers.push(m);
+    if(lng>12.40) cityBounds.push([lat,lng]); // excluye Fiumicino para encuadrar la ciudad
   });
-  // centro la vista en la ciudad (sin el aeropuerto, que está lejos)
-  map.setView([41.897,12.478],13);
+
+  function fitCity(){ map.invalidateSize(); if(cityBounds.length) map.fitBounds(cityBounds,{padding:[40,40],maxZoom:14}); }
+  fitCity(); setTimeout(fitCity,300); window.addEventListener('load',fitCity);
 
   var btns=document.querySelectorAll('#filters button');
   btns.forEach(function(b){
@@ -389,6 +401,7 @@
         if(match){ if(!map.hasLayer(m)) m.addTo(map); shown.push(m.getLatLng()); }
         else { if(map.hasLayer(m)) map.removeLayer(m); }
       });
+      map.invalidateSize();
       if(shown.length) map.fitBounds(shown,{padding:[50,50],maxZoom:15});
     });
   });
